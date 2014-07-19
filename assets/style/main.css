@@ -112,7 +112,8 @@ input#search-bar:before {
   left: -5px;
   content: "\f002";
 }
-input {
+input,
+textarea {
   cursor: pointer;
   box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -134,10 +135,18 @@ input {
   background: #191919;
 }
 input:hover,
-input:focus {
+textarea:hover,
+input:focus,
+textarea:focus {
   color: #fcf7b1;
   border: 3px solid #fcf7b1;
   outline: 0;
+}
+textarea {
+  height: 80px;
+  text-align: left;
+  padding: 8px 20px;
+  text-transform: none;
 }
 button {
   cursor: pointer;
@@ -162,7 +171,7 @@ button {
 }
 button:hover,
 button:focus {
-  background: #cbcbcb;
+  background: #3065a1;
   outline: 0;
 }
 #nav {
@@ -208,6 +217,9 @@ button:focus {
   background: #252525;
   color: #fcf7b1;
 }
+a .box {
+  color: #b2b2b2;
+}
 .box {
   box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -234,4 +246,8 @@ button:focus {
 .box .content {
   width: 80%;
   display: inline-block;
+}
+.box.box-profile {
+  background: #3065a1;
+  border: none;
 }
