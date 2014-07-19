@@ -1,4 +1,106 @@
-h1
-  color red
-p
-  font-size 100px
+/* COLORS */
+MAIN_COLOR = #fefefe
+YELLOW = #FCF7B1
+
+/* MIXINS */
+fader(prop, seconds)
+  -webkit-transition prop seconds linear
+  -moz-transition prop seconds linear
+  -ms-transition prop seconds linear
+  -o-transition prop seconds linear
+
+/* GLOBALS */
+html, body
+  height 100%
+body
+  padding 0
+  margin 0
+  font-family 'Lato', Helvetica, sans-serif
+  background darken(MAIN_COLOR, 90%)
+  color darken(MAIN_COLOR, 30%)
+
+.justify-text
+  text-align justify
+
+.center-text
+  text-align center
+
+.pull-right
+  float right
+
+.pull-left
+  float left
+
+input
+  &::-webkit-input-placeholder
+    fader(all, 0.3s)
+    color darken(MAIN_COLOR, 30%)
+  &:focus, &:hover
+    &::-webkit-input-placeholder
+      color YELLOW
+    &:-moz-placeholder
+      color YELLOW
+    &::-moz-placeholder
+      color YELLOW
+    &:-ms-input-placeholder
+      color YELLOW
+  &:-moz-placeholder
+    fader(all, 0.3s)
+    color darken(MAIN_COLOR, 30%)
+  &::-moz-placeholder
+    fader(all, 0.3s)
+    color darken(MAIN_COLOR, 30%)
+  &:-ms-input-placeholder
+    fader(all, 0.3s)
+    color darken(MAIN_COLOR, 30%)
+
+// search bar
+input#search-bar
+  fader(all, 0.3s)
+  width 100%
+  margin 0 auto
+  border 3px solid darken(MAIN_COLOR, 30%)
+  font-size 14px
+  text-transform uppercase
+  font-weight bold
+  letter-spacing 2px
+  text-align center
+  padding 8px 0px
+  color darken(MAIN_COLOR, 30%)
+  background darken(MAIN_COLOR, 90%)
+  &:hover, &:focus
+    border 3px solid YELLOW
+    outline 0
+
+// navigation
+#nav
+  position fixed
+  bottom 0
+  width 100%
+  background rgba(darken(MAIN_COLOR, 99%), 0.75)
+  border-top 1px solid darken(MAIN_COLOR, 70%)
+  text-align center
+  margin 0 auto
+  min-width 320px
+  width 100%
+  a
+    box-sizing:border-box;
+    -moz-box-sizing:border-box;
+    -webkit-box-sizing:border-box;
+    display inline-block
+    padding 6px 0.5% 6px
+    width 19%
+    fader(color, 0.3s)
+    text-decoration none
+    color darken(MAIN_COLOR, 30%)
+    &:hover
+      color YELLOW
+    i
+      font-size 20px
+      margin 0
+      padding 0
+    p
+      margin 0
+      padding 0
+      font-size 13px  
+      font-weight 300
