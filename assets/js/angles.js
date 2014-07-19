@@ -15,5 +15,5 @@ inHouseApp.config(function($routeProvider) {
 
 // controllers
 inHouseApp.controller('IndexCtrl', function($scope) {
-  $scope.title = 'inHouse';
+  $scope.app = 'inHouse';
 });
