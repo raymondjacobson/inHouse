@@ -251,3 +251,6 @@ a .box {
   background: #3065a1;
   border: none;
 }
+.box.box-profile i {
+  color: #b2b2b2;
+}
