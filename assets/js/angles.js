@@ -47,12 +47,15 @@ inHouseApp.controller('FeaturedCtrl', function($scope) {
 });
 inHouseApp.controller('PopularCtrl', function($scope) {
   $scope.reference_name = 'popular';
-  $.ajax{
-    url: "/services/data/v29.0/query?q=SELECT+name+FROM+Concept__c+WHERE+name+=+'abd'"
-    method: 'GET'
+  console.log("1");
+  $.ajax({
+    url: " https://na17.salesforce.com//services/data/v29.0/query?q=SELECT+name+FROM+Concept__c+WHERE+name+=+'go'",
+    type: 'GET',
     success: function(data){
-      $scope.search_results = data
+      console.log("1");
+      // $scope.search_results = data
     }
+  })
 });
 inHouseApp.controller('RecentCtrl', function($scope) {
   $scope.reference_name = 'recent';
