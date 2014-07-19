@@ -24,6 +24,7 @@ app.use(stylus.middleware(
   }
 ));
 app.use(express.static(__dirname + '/assets'))
+app.use(express.static(__dirname + '/views'))
 
 // handles
 app.get('/', routes.layout);
