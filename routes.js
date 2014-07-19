@@ -1,5 +1,5 @@
-exports.index = function(req, res) {
-  res.render('index', {
+exports.layout = function(req, res) {
+  res.render('layout', {
     title: 'inHouse'
   })
 }

@@ -2,7 +2,7 @@ var express = require('express')
   , http = require('http')
   , stylus = require('stylus')
   , nib = require('nib')
-  , routes = require('routes.js')
+  , routes = require('./routes')
 
 var app = express();
 function compile(str, path) {
@@ -26,7 +26,7 @@ app.use(stylus.middleware(
 app.use(express.static(__dirname + '/assets'))
 
 // handles
-app.get('/', routes.index);
+app.get('/', routes.layout);
 
 http.createServer(app).listen(app.get('port'), function () {
   console.log('Express app listening on port ' + app.get('port'));
