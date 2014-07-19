@@ -7,6 +7,10 @@ inHouseApp.config(function($routeProvider) {
       templateUrl: '/partials/_index',
       controller: 'IndexCtrl'
     })
+    .when('/featured', {
+      templateUrl: '/partials/_featured',
+      controller: 'FeaturedCtrl'
+    })
     .otherwise({
       templateUrl: '/partials/_index',
       controller: 'IndexCtrl'
@@ -16,4 +20,8 @@ inHouseApp.config(function($routeProvider) {
 // controllers
 inHouseApp.controller('IndexCtrl', function($scope) {
   $scope.app = 'inHouse';
+});
+inHouseApp.controller('FeaturedCtrl', function($scope) {
+  console.log('asdf');
+  $scope.app = 'mengmeng';
 });
