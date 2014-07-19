@@ -1,6 +1,7 @@
 /* COLORS */
 MAIN_COLOR = #fefefe
 YELLOW = #FCF7B1
+BLUE = #3065A1
 
 /* MIXINS */
 fader(prop, seconds)
@@ -27,10 +28,10 @@ p
   font-size 15px
 
 small
-    color YELLOW
-    font-size 10px
-    font-weight 300
-    margin-left 5px
+  color YELLOW
+  font-size 10px
+  font-weight 300
+  margin-left 5px
 
 /* GLOBALS */
 html, body
@@ -96,7 +97,7 @@ input#search-bar:before
   content "\f002"
 
 // forms
-input
+input, textarea
   cursor pointer
   box-sizing:border-box;
   -moz-box-sizing:border-box;
@@ -117,6 +118,11 @@ input
     color YELLOW
     border 3px solid YELLOW
     outline 0
+textarea
+  height 80px
+  text-align left
+  padding 8px 20px
+  text-transform none
 
 button
   cursor pointer
@@ -136,7 +142,7 @@ button
   color darken(MAIN_COLOR, 90%)
   background darken(MAIN_COLOR, 30%)
   &:hover, &:focus
-    background darken(MAIN_COLOR, 20%)
+    background BLUE
     outline 0
 
 // navigation
@@ -176,7 +182,9 @@ button
       color YELLOW
 
 // lists of concepts
-.box 
+a .box
+  color darken(MAIN_COLOR, 30%)
+.box
   box-sizing:border-box;
   -moz-box-sizing:border-box;
   -webkit-box-sizing:border-box;
@@ -198,3 +206,8 @@ button
   .content
     width 80%
     display inline-block
+  &.box-profile
+    background BLUE
+    border none
+    i
+      color darken(MAIN_COLOR, 30%)
