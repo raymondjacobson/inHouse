@@ -4,8 +4,10 @@ var configuration = require("./configuration");
 // Express routes (use sparingly/for API calls)
 
 exports.layout = function(req, res) {
+  var testData = require("./test-session-object.json");
   res.render('layout', {
-    title: 'inHouse'
+    title: 'inHouse',
+    signedRequestJson: JSON.stringify(testData)
   })
 }
 

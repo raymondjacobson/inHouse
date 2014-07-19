@@ -1,3 +1,3 @@
 $(document).ready(function(){
-  console.log('go');
+  // calls when original page loads
 })

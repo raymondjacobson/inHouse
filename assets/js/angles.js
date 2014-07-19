@@ -4,24 +4,65 @@ var inHouseApp = angular.module('inHouseApp', ['ngRoute']);
 inHouseApp.config(function($routeProvider) {
   $routeProvider
     .when('/', {
-      templateUrl: '/partials/_index',
-      controller: 'IndexCtrl'
-    })
-    .when('/featured', {
       templateUrl: '/partials/_featured',
       controller: 'FeaturedCtrl'
     })
+    .when('/popular', {
+      templateUrl: '/partials/_popular',
+      controller: 'PopularCtrl'
+    })
+    .when('/recent', {
+      templateUrl: '/partials/_recent',
+      controller: 'RecentCtrl'
+    })
+    .when('/search', {
+      templateUrl: '/partials/_search',
+      controller: 'SearchCtrl'
+    })
+    .when('/profile/:id', {
+      templateUrl: '/partials/_profile',
+      controller: 'ProfileCtrl'
+    })
+    .when('/concept/:id', {
+      templateUrl: '/partials/_concept_view',
+      controller: 'ConceptViewCtrl'
+    })
+    .when('/concept/:id/add', {
+      templateUrl: '/partials/_concept_add',
+      controller: 'ConceptAddCtrl'
+    })
+    .when('/concept/:id/edit', {
+      templateUrl: '/partials/_concept_edit',
+      controller: 'ConceptEditCtrl'
+    })
     .otherwise({
-      templateUrl: '/partials/_index',
-      controller: 'IndexCtrl'
+      templateUrl: '/partials/_featured',
+      controller: 'FeaturedCtrl'
     });
 });
 
 // controllers
-inHouseApp.controller('IndexCtrl', function($scope) {
-  $scope.app = 'inHouse';
-});
 inHouseApp.controller('FeaturedCtrl', function($scope) {
-  console.log('asdf');
-  $scope.app = 'mengmeng';
+  $scope.reference_name = 'featured';
+});
+inHouseApp.controller('PopularCtrl', function($scope) {
+  $scope.reference_name = 'popular';
+});
+inHouseApp.controller('RecentCtrl', function($scope) {
+  $scope.reference_name = 'recent';
+});
+inHouseApp.controller('SearchCtrl', function($scope) {
+  $scope.reference_name = 'search';
+});
+inHouseApp.controller('ProfileCtrl', function($scope) {
+  $scope.reference_name = 'profile';
+});
+inHouseApp.controller('ConceptViewCtrl', function($scope) {
+  $scope.reference_name = 'view concept';
+});
+inHouseApp.controller('ConceptAddCtrl', function($scope) {
+  $scope.reference_name = 'add concept';
+});
+inHouseApp.controller('ConceptEditCtrl', function($scope) {
+  $scope.reference_name = 'edit concept';
 });
