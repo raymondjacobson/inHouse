@@ -23,13 +23,13 @@ inHouseApp.config(function($routeProvider) {
       templateUrl: '/partials/_profile',
       controller: 'ProfileCtrl'
     })
+    .when('/concept/add', {
+      templateUrl: '/partials/_concept_add',
+      controller: 'ConceptAddCtrl'
+    })
     .when('/concept/:id', {
       templateUrl: '/partials/_concept_view',
       controller: 'ConceptViewCtrl'
-    })
-    .when('/concept/:id/add', {
-      templateUrl: '/partials/_concept_add',
-      controller: 'ConceptAddCtrl'
     })
     .when('/concept/:id/edit', {
       templateUrl: '/partials/_concept_edit',
@@ -52,7 +52,7 @@ inHouseApp.controller('RecentCtrl', function($scope) {
   $scope.reference_name = 'recent';
 });
 inHouseApp.controller('SearchCtrl', function($scope) {
-  $scope.reference_name = 'search';
+  $scope.reference_name = 'results';
 });
 inHouseApp.controller('ProfileCtrl', function($scope) {
   $scope.reference_name = 'profile';

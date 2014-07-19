@@ -23,17 +23,18 @@ html(ng-app='inHouseApp' class="no-js" lang="en")
     div(id='container')
         div(id='search')
             input(type='text' id='search-bar' placeholder='search')
+            i(class='fa fa-search')
         div(ng-view)
     div(id='nav')
-        a(href='#concept/1/add')
+        a(href='#concept/add')
             i(class='fa fa-lightbulb-o')
             p add
         a(href='#popular')
             i(class='fa fa-bullhorn')
             p popular
-        a(href='#featured' class='center')
-            i(class='fa fa-home')
-            p home
+        a(href='#featured' class='index')
+            i(class='fa fa-star-o')
+            p featured
         a(href='#recent')
             i(class='fa fa-clock-o')
             p recent

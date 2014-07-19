@@ -1,16 +1,51 @@
 /* COLORS */
 /* MIXINS */
+/* typography */
+h1 {
+  font-size: 14px;
+  text-transform: uppercase;
+}
+h2 {
+  font-size: 14px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin: 0;
+  padding: 0;
+}
+p {
+  margin: 0;
+  padding: 0;
+  font-size: 15px;
+}
+small {
+  color: #fcf7b1;
+  font-size: 10px;
+  font-weight: 300;
+  margin-left: 5px;
+}
 /* GLOBALS */
 html,
 body {
   height: 100%;
+  background: #191919;
 }
 body {
   padding: 0;
   margin: 0;
   font-family: 'Lato', Helvetica, sans-serif;
-  background: #191919;
   color: #b2b2b2;
+}
+.cf {
+  *zoom: 1;
+}
+.cf:after {
+  clear: both;
+}
+.cf:before,
+.cf:after {
+  content: " ";
+  display: table;
 }
 .justify-text {
   text-align: justify;
@@ -25,10 +60,10 @@ body {
   float: left;
 }
 input::-webkit-input-placeholder {
-  -webkit-transition: all 0.3s linear;
-  -moz-transition: all 0.3s linear;
-  -ms-transition: all 0.3s linear;
-  -o-transition: all 0.3s linear;
+  -webkit-transition: color 0.3s linear;
+  -moz-transition: color 0.3s linear;
+  -ms-transition: color 0.3s linear;
+  -o-transition: color 0.3s linear;
   color: #b2b2b2;
 }
 input:focus::-webkit-input-placeholder,
@@ -48,33 +83,37 @@ input:hover:-ms-input-placeholder {
   color: #fcf7b1;
 }
 input:-moz-placeholder {
-  -webkit-transition: all 0.3s linear;
-  -moz-transition: all 0.3s linear;
-  -ms-transition: all 0.3s linear;
-  -o-transition: all 0.3s linear;
+  -webkit-transition: color 0.3s linear;
+  -moz-transition: color 0.3s linear;
+  -ms-transition: color 0.3s linear;
+  -o-transition: color 0.3s linear;
   color: #b2b2b2;
 }
 input::-moz-placeholder {
-  -webkit-transition: all 0.3s linear;
-  -moz-transition: all 0.3s linear;
-  -ms-transition: all 0.3s linear;
-  -o-transition: all 0.3s linear;
+  -webkit-transition: color 0.3s linear;
+  -moz-transition: color 0.3s linear;
+  -ms-transition: color 0.3s linear;
+  -o-transition: color 0.3s linear;
   color: #b2b2b2;
 }
 input:-ms-input-placeholder {
-  -webkit-transition: all 0.3s linear;
-  -moz-transition: all 0.3s linear;
-  -ms-transition: all 0.3s linear;
-  -o-transition: all 0.3s linear;
+  -webkit-transition: color 0.3s linear;
+  -moz-transition: color 0.3s linear;
+  -ms-transition: color 0.3s linear;
+  -o-transition: color 0.3s linear;
   color: #b2b2b2;
 }
-input#search-bar {
+input {
+  cursor: pointer;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
   -webkit-transition: all 0.3s linear;
   -moz-transition: all 0.3s linear;
   -ms-transition: all 0.3s linear;
   -o-transition: all 0.3s linear;
   width: 100%;
-  margin: 0 auto;
+  margin: 0 auto 20px;
   border: 3px solid #b2b2b2;
   font-size: 14px;
   text-transform: uppercase;
@@ -85,9 +124,36 @@ input#search-bar {
   color: #b2b2b2;
   background: #191919;
 }
-input#search-bar:hover,
-input#search-bar:focus {
+input:hover,
+input:focus {
+  color: #fcf7b1;
   border: 3px solid #fcf7b1;
+  outline: 0;
+}
+button {
+  cursor: pointer;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -webkit-transition: all 0.3s linear;
+  -moz-transition: all 0.3s linear;
+  -ms-transition: all 0.3s linear;
+  -o-transition: all 0.3s linear;
+  width: 100%;
+  margin: 0 auto 20px;
+  border: none;
+  font-size: 14px;
+  text-transform: uppercase;
+  font-weight: bold;
+  letter-spacing: 2px;
+  text-align: center;
+  padding: 15px 0px;
+  color: #191919;
+  background: #b2b2b2;
+}
+button:hover,
+button:focus {
+  background: #cbcbcb;
   outline: 0;
 }
 #nav {
@@ -108,10 +174,10 @@ input#search-bar:focus {
   display: inline-block;
   padding: 6px 0.5% 6px;
   width: 19%;
-  -webkit-transition: color 0.3s linear;
-  -moz-transition: color 0.3s linear;
-  -ms-transition: color 0.3s linear;
-  -o-transition: color 0.3s linear;
+  -webkit-transition: all 0.3s linear;
+  -moz-transition: all 0.3s linear;
+  -ms-transition: all 0.3s linear;
+  -o-transition: all 0.3s linear;
   text-decoration: none;
   color: #b2b2b2;
 }
@@ -128,4 +194,35 @@ input#search-bar:focus {
   padding: 0;
   font-size: 13px;
   font-weight: 300;
+}
+#nav a.index {
+  background: #252525;
+  color: #fcf7b1;
+}
+.box {
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  margin: 20px auto;
+  padding: 20px 5% 10px;
+  width: 100%;
+  background: #333;
+  border: 3px solid #333;
+}
+.box:hover {
+  border: 3px solid #b2b2b2;
+  background: none;
+}
+.box .thumb {
+  width: 20%;
+  display: inline-block;
+  vertical-align: top;
+}
+.box .thumb i {
+  font-size: 60px;
+  color: #fcf7b1;
+}
+.box .content {
+  width: 80%;
+  display: inline-block;
 }

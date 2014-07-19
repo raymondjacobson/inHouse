@@ -9,16 +9,47 @@ fader(prop, seconds)
   -ms-transition prop seconds linear
   -o-transition prop seconds linear
 
+/* typography */
+h1
+  font-size 14px
+  text-transform uppercase
+
+h2
+  font-size 14px
+  font-weight bold
+  letter-spacing 2px
+  text-transform uppercase
+  margin 0
+  padding 0
+p
+  margin 0
+  padding 0
+  font-size 15px
+
+small
+    color YELLOW
+    font-size 10px
+    font-weight 300
+    margin-left 5px
+
 /* GLOBALS */
 html, body
   height 100%
+  background darken(MAIN_COLOR, 90%)
 body
   padding 0
   margin 0
   font-family 'Lato', Helvetica, sans-serif
-  background darken(MAIN_COLOR, 90%)
   color darken(MAIN_COLOR, 30%)
-
+  // margin-bottom 180px
+.cf
+  *zoom 1
+  &:after
+    clear both
+.cf:before,
+.cf:after
+  content " "
+  display table
 .justify-text
   text-align justify
 
@@ -33,7 +64,7 @@ body
 
 input
   &::-webkit-input-placeholder
-    fader(all, 0.3s)
+    fader(color, 0.3s)
     color darken(MAIN_COLOR, 30%)
   &:focus, &:hover
     &::-webkit-input-placeholder
@@ -45,20 +76,24 @@ input
     &:-ms-input-placeholder
       color YELLOW
   &:-moz-placeholder
-    fader(all, 0.3s)
+    fader(color, 0.3s)
     color darken(MAIN_COLOR, 30%)
   &::-moz-placeholder
-    fader(all, 0.3s)
+    fader(color, 0.3s)
     color darken(MAIN_COLOR, 30%)
   &:-ms-input-placeholder
-    fader(all, 0.3s)
+    fader(color, 0.3s)
     color darken(MAIN_COLOR, 30%)
 
 // search bar
-input#search-bar
+input
+  cursor pointer
+  box-sizing:border-box;
+  -moz-box-sizing:border-box;
+  -webkit-box-sizing:border-box;
   fader(all, 0.3s)
   width 100%
-  margin 0 auto
+  margin 0 auto 20px
   border 3px solid darken(MAIN_COLOR, 30%)
   font-size 14px
   text-transform uppercase
@@ -69,7 +104,29 @@ input#search-bar
   color darken(MAIN_COLOR, 30%)
   background darken(MAIN_COLOR, 90%)
   &:hover, &:focus
+    color YELLOW
     border 3px solid YELLOW
+    outline 0
+
+button
+  cursor pointer
+  box-sizing:border-box;
+  -moz-box-sizing:border-box;
+  -webkit-box-sizing:border-box;
+  fader(all, 0.3s)
+  width 100%
+  margin 0 auto 20px
+  border none
+  font-size 14px
+  text-transform uppercase
+  font-weight bold
+  letter-spacing 2px
+  text-align center
+  padding 15px 0px
+  color darken(MAIN_COLOR, 90%)
+  background darken(MAIN_COLOR, 30%)
+  &:hover, &:focus
+    background darken(MAIN_COLOR, 20%)
     outline 0
 
 // navigation
@@ -90,7 +147,7 @@ input#search-bar
     display inline-block
     padding 6px 0.5% 6px
     width 19%
-    fader(color, 0.3s)
+    fader(all, 0.3s)
     text-decoration none
     color darken(MAIN_COLOR, 30%)
     &:hover
@@ -104,3 +161,30 @@ input#search-bar
       padding 0
       font-size 13px  
       font-weight 300
+    &.index
+      background #252525
+      color YELLOW
+
+// lists of concepts
+.box 
+  box-sizing:border-box;
+  -moz-box-sizing:border-box;
+  -webkit-box-sizing:border-box;
+  margin 20px auto
+  padding 20px 5% 10px
+  width 100%
+  background #333
+  border 3px solid #333
+  &:hover
+    border 3px solid darken(MAIN_COLOR, 30%)
+    background none
+  .thumb
+    width 20%
+    display inline-block
+    vertical-align top
+    i
+      font-size 60px
+      color YELLOW
+  .content
+    width 80%
+    display inline-block
