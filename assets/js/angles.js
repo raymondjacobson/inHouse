@@ -4,7 +4,11 @@ var inHouseApp = angular.module('inHouseApp', ['ngRoute']);
 inHouseApp.config(function($routeProvider) {
   $routeProvider
     .when('/', {
-      templateUrl: 'partials/_index.html',
+      templateUrl: '/partials/_index',
+      controller: 'IndexCtrl'
+    })
+    .otherwise({
+      templateUrl: '/partials/_index',
       controller: 'IndexCtrl'
     });
 });

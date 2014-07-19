@@ -1,11 +1,9 @@
 doctype html
-html(ngapp='inHouseApp')
+html(ng-app='inHouseApp')
   head
     meta(charset='utf8')
     title #{title}
     link(rel='stylesheet' href='/style/main.css')
-    script(type='text/javascript' src='js/angular.min.js')
-    script(type='text/javascript' src='js/angular-route.min.js')
     script(type='text/javascript' src='js/jquery.min.js')
     script(type='text/javascript' src='js/main.js')
   body(ng-controller='IndexCtrl')
@@ -13,4 +11,6 @@ html(ngapp='inHouseApp')
     p asdf
     div(class='container')
       div(ng-view)
+    script(type='text/javascript' src='js/angular.min.js')
+    script(type='text/javascript' src='js/angular-route.min.js')
     script(type='text/javascript' src='js/angles.js')

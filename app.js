@@ -24,10 +24,13 @@ app.use(stylus.middleware(
   }
 ));
 app.use(express.static(__dirname + '/assets'))
-app.use(express.static(__dirname + '/views'))
 
 // handles
 app.get('/', routes.layout);
+app.get('/partials/:name', function (req, res) {
+    var name = req.params.name;
+    res.render('partials/' + name);
+});
 
 http.createServer(app).listen(app.get('port'), function () {
   console.log('Express app listening on port ' + app.get('port'));
