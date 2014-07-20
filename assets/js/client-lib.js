@@ -29,7 +29,7 @@ var sf_POST = function(sr, url, body) {
     });
 }
 
-var sf_PATCH = function(sr, url, body, diff, num) {
+var sf_PATCH = function(sr, url, body) {
   console.log('patch' + url);
   Sfdc.canvas.client.ajax(url,
     {client: sr.client,
@@ -40,10 +40,6 @@ var sf_PATCH = function(sr, url, body, diff, num) {
         console.log(data.status);
         if (204 === data.status) {
           console.log("Success");
-          console.log(num);
-          if (num == 1) {
-            updateUserTokens(sr, url, body, diff, num+1 );
-          }
         }
       }
     });
@@ -53,7 +49,7 @@ var updateUserTokens = function(sr, url, body, diff, number) {
   body.TotalTokens__c = -1*diff;
   console.log(body);
   console.log(sr.userId);
-  url = '/services/data/v31.0/sobjects/User/'+sr.userId + '/TotalTokens__c';
+  url = '/services/data/v31.0/sobjects/User/'+sr.userId;
   console.log(url);
   var curTokens;
   Sfdc.canvas.client.ajax(url, 
@@ -62,7 +58,18 @@ var updateUserTokens = function(sr, url, body, diff, number) {
     contentType: "application/json",
     success: function(data) {
       console.log(data.status);
-      curTokens = data;
+      console.log(data);
+      if (!data.payload.TotalTokens__c) {
+        curTokens = 150;
+      } else {
+        curTokens = data.payload.TotalTokens__c;
+      }
+      console.log(curTokens);
+      console.log(data.payload.TotalTokens__c);
+      curTokens = curTokens + body.TotalTokens__c;
+      console.log(curTokens);
+
+        sf_PATCH(sr, url, {'Total__c': curTokens}, 0, number);
       } 
     }
   );
