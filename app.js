@@ -53,6 +53,6 @@ app.get('/partials/:name', function (req, res) {
     res.render('partials/' + name);
 });
 
-http.createServer(options, app).listen(app.get('port'), function () {
+https.createServer(options, app).listen(app.get('port'), function () {
   console.log('Express app listening on port ' + app.get('port'));
 });
