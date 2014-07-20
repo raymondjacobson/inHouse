@@ -1,14 +1,15 @@
 h1 {{reference_name}}
-h1(ng-repeat="concept in concepts")
-  a(href='#concept/{{concept.payload.Id}}')
-    div(class='box')
-      div(class='thumb cf')
-        i(class='fa fa-globe')
-      div(class='content cf')
-        h2 {{concept.payload.Name}}
-          small(class='date') {{concept.payload.GenerationDate__c}}
-        p {{concept.payload.Abstract__c}}
-        p
-          em(class='tokens green') cost: 100
-          em(class='tokens green') tokens: {{concept.payload.TotalTokens__c}}
+
+a(ng-repeat="concept in concepts" href='#concept/{{concept.payload.Id}}')
+  div(class='box')
+    div(class='thumb cf')
+      i(class='fa fa-globe')
+    div(class='content cf')
+      h2 {{concept.payload.Name}}
+        small(class='date') {{concept.payload.GenerationDate__c}}
+      p {{concept.payload.Abstract__c}}
+      p
+        em(class='tokens green') cost: 100
+        em(class='tokens green') tokens: {{concept.payload.TotalTokens__c}}
+
 div(id='chart')
