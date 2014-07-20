@@ -113,7 +113,7 @@ inHouseApp.controller('FeaturedCtrl', function($scope, $http, $q) {
                 deferred.resolve(concepts);
                 deferred.promise.then(function(concepts_data){
                   concepts_data.sort(function(a, b){
-                    return b.payload.TotalTokens__c - a.payload.TotalTokens__c;
+                    return b.payload.Author__c - a.payload.Author__c;
                   });
                   $scope.concepts = concepts_data.slice(0, 3);
                 });
@@ -238,7 +238,21 @@ inHouseApp.controller('ProfileCtrl', function($scope, $q) {
   $scope.first_name = sr.context.user.firstName;
   $scope.last_name = sr.context.user.lastName;
   $scope.email = sr.context.user.email;
-  $scope.tokens = 100;
+  var def = $q.defer();
+  var get_user_tokens_url = "/services/data/v29.0/query?q=SELECT+Tokens__c+,+UserId__c+FROM+UserTokens__c+WHERE+UserId__c+=+'"+sr.userId+"'";
+  console.log(get_user_tokens_url);
+  Sfdc.canvas.client.ajax(get_user_tokens_url,
+    {client: sr.client,
+    success: function(token_data){
+      if (token_data.status == 200) {
+        console.log(token_data);
+         def.resolve(token_data);
+         def.promise.then(function(d){
+            $scope.tokens = d.payload.records[0].Tokens__c;
+         })
+        }
+      }
+    });
   var deferred = $q.defer();
   $scope.reference_name = 'featured';
   var query = "SELECT+name+FROM+Concept__c+WHERE+CreatedById+=+'"+sr.context.user.userId+"'";

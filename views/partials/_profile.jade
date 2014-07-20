@@ -7,7 +7,7 @@ div(class='box box-profile')
     h2 {{first_name}} {{last_name}} 
     p {{email}}
     p Tokens: 
-      i(class='fa fa-empire') 100
+      i(class='fa fa-empire') {{tokens}}
 
 a(ng-repeat="concept in concepts" href='#concept/{{concept.payload.Id}}/edit')
   div(class='box')
