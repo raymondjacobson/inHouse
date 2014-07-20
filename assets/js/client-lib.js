@@ -1,14 +1,12 @@
 var sf_GET = function(sr, url, promise, scope) {
   console.log('get' + url);
-  console.log(promise);
   Sfdc.canvas.client.ajax(url,
     {client: sr.client,
     success: function(data){
       console.log(data);
       if (data.status == 200) {
-        console.log('success');
+        console.log('Success');
         promise.resolve(data);
-        console.log(promise.promise);
         scope.concepts = 'asdf';
       }
     }});

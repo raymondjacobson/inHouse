@@ -10,6 +10,14 @@ h2 {
   font-weight: bold;
   letter-spacing: 2px;
   text-transform: uppercase;
+  margin: 10px 0px 0px 0px;
+  padding: 0;
+  color: #cbcbcb;
+}
+h3 {
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: 2px;
   margin: 0;
   padding: 0;
   color: #cbcbcb;
