@@ -55,7 +55,7 @@ inHouseApp.config(function($routeProvider) {
       templateUrl: '/partials/_search',
       controller: 'SearchCtrl'
     })
-    .when('/profile/:id', {
+    .when('/profile', {
       templateUrl: '/partials/_profile',
       controller: 'ProfileCtrl'
     })
