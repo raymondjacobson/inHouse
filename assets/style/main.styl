@@ -3,7 +3,7 @@ MAIN_COLOR = #fefefe
 YELLOW = rgb(51, 148, 211)
 // YELLOW = rgb(252, 190, 48)
 // BLUE = #3065A1
-BLUE = rgb(51, 148, 211)
+BLUE = rgb(52, 168, 243)
 GREEN = #82C087
 
 /* MIXINS */
@@ -25,7 +25,7 @@ h2
   text-transform uppercase
   margin 0
   padding 0
-  color darken(MAIN_COLOR, 20%)
+  color darken(MAIN_COLOR, 15%)
 p
   margin 0
   padding 0
@@ -50,12 +50,12 @@ small
 /* GLOBALS */
 html, body
   height 100%
-  background darken(MAIN_COLOR, 90%)
+  background darken(MAIN_COLOR, 80%)
 body
   padding 0
   margin 0
   font-family 'Lato', Helvetica, sans-serif
-  color darken(MAIN_COLOR, 30%)
+  color darken(MAIN_COLOR, 18%)
 .push
   height 60px
 .cf
@@ -84,7 +84,7 @@ body
 input
   &::-webkit-input-placeholder
     fader(color, 0.3s)
-    color darken(MAIN_COLOR, 30%)
+    color darken(MAIN_COLOR, 18%)
   &:focus, &:hover
     &::-webkit-input-placeholder
       color YELLOW
@@ -96,13 +96,13 @@ input
       color YELLOW
   &:-moz-placeholder
     fader(color, 0.3s)
-    color darken(MAIN_COLOR, 30%)
+    color darken(MAIN_COLOR, 18%)
   &::-moz-placeholder
     fader(color, 0.3s)
-    color darken(MAIN_COLOR, 30%)
+    color darken(MAIN_COLOR, 18%)
   &:-ms-input-placeholder
     fader(color, 0.3s)
-    color darken(MAIN_COLOR, 30%)
+    color darken(MAIN_COLOR, 18%)
 
 // search bar
 input#search-bar:before
@@ -123,15 +123,16 @@ input, textarea
   fader(all, 0.3s)
   width 100%
   margin 0 auto 20px
-  border 3px solid darken(MAIN_COLOR, 30%)
+  border 3px solid darken(MAIN_COLOR, 18%)
   font-size 14px
   text-transform uppercase
   font-weight bold
   letter-spacing 2px
   text-align center
   padding 8px 0px
-  color darken(MAIN_COLOR, 30%)
-  background darken(MAIN_COLOR, 90%)
+  color darken(MAIN_COLOR, 18%)
+  background darken(MAIN_COLOR, 80%)
+  // SEARCH BOXXXXX
   &:hover, &:focus
     color YELLOW
     border 3px solid YELLOW
@@ -163,8 +164,9 @@ button
   letter-spacing 2px
   text-align center
   padding 15px 0px
-  color darken(MAIN_COLOR, 90%)
-  background darken(MAIN_COLOR, 30%)
+  color darken(MAIN_COLOR, 80%)
+  background darken(MAIN_COLOR, 18%)
+  //ADD BUTTON
   &:hover, &:focus
     background BLUE
     outline 0
@@ -172,15 +174,17 @@ button
   cursor pointer
   fader(all, 0.3s)
   &:hover
-    border-color lighten(BLUE, 20%)
-    color lighten(BLUE, 20%)
+    border-color lighten(BLUE, 35%)
+    color lighten(BLUE, 35%)
 // navigation
 #nav
   position fixed
   bottom 0
   width 100%
-  background rgba(darken(MAIN_COLOR, 99%), 0.6)
+  background rgba(darken(MAIN_COLOR, 95%), 0.6)
+  // BUTTOM BAR
   border-top 1px solid darken(MAIN_COLOR, 70%)
+  // NOT SURE
   text-align center
   margin 0 auto
   min-width 320px
@@ -194,7 +198,7 @@ button
     width 19%
     fader(all, 0.3s)
     text-decoration none
-    color darken(MAIN_COLOR, 30%)
+    color darken(MAIN_COLOR, 18%)
     &:hover
       color YELLOW
     i
@@ -212,7 +216,7 @@ button
 
 // lists of concepts
 a .box
-  color darken(MAIN_COLOR, 30%)
+  color darken(MAIN_COLOR, 18%)
 .box
   cursor pointer
   box-sizing:border-box;
@@ -224,7 +228,7 @@ a .box
   background #333
   border 3px solid #333
   &:hover, &.hovered
-    border 3px solid darken(MAIN_COLOR, 30%)
+    border 3px solid darken(MAIN_COLOR, 18%)
     background none
   .thumb
     width 20%
@@ -245,4 +249,4 @@ a .box
     background BLUE
     border none
     i
-      color darken(MAIN_COLOR, 30%)
+      color darken(MAIN_COLOR, 18%)
