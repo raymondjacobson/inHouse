@@ -245,15 +245,14 @@ inHouseApp.controller('ConceptViewCtrl', function($scope, $location, $q) {
       if (data.status == 200) {
         deferred.resolve(data);
         deferred.promise.then(function(data){
-          console.log(data);
           $scope.concept = data;
+          var width = $('.box').width();
+          var chart_data = data.payload.PastTokens__c.split(',');
+          var chart = generateC3Graph('#chart', chart_data, width);
         })
       }
     }
   });
-  var width = $('.box').width();
-  var data = [30, 200, 100, 400, 150, 250, 30, 30, 40, 50, 100, 120];
-  var chart = generateC3Graph('#chart', data, width);
   $(".buy-stock").click(function(){
     console.log("Good for you!");
     // sf_PATCH(sr, url, body);
