@@ -254,3 +254,6 @@ a .box {
 .box.box-profile i {
   color: #b2b2b2;
 }
+#chart .c3-line-data2 {
+  stroke-width: 5px;
+}
