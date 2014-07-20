@@ -298,6 +298,26 @@ inHouseApp.controller('ConceptViewCtrl', function($scope, $location, $q) {
     // sf_PATCH(sr, url, body);
     // $location.path('/featured');
   });
+  $("#message-go").click(function(){
+    var message = $("#message-bar").val();
+    message += ' Check out the concept ' + $(".title-name").clone().children().remove().end().text() + ' on inHouse.';
+    var body = {body: {messageSegments: [
+        {type: "Text", text: message }
+    ]}};
+    var url = sr.context.links.chatterFeedsUrl + "/news/" + sr.context.user.userId + "/feed-items";
+    Sfdc.canvas.client.ajax(url,
+      {client: sr.client,
+          method: 'POST',
+          contentType: "application/json",
+          data: JSON.stringify(body),
+          success: function (data) {
+              if (201 === data.status) {
+                  console.log("Success");
+                  $("#message-bar").val('');
+              }
+          }
+      });
+  })
 });
 inHouseApp.controller('ConceptAddCtrl', function($scope, $location) {
   var today = new Date();

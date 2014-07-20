@@ -2,7 +2,7 @@ div(class='box hovered')
   div(class='thumb cf')
     i(class='fa fa-globe')
   div(class='content cf')
-    h2 {{concept.payload.Name}}
+    h2(class='title-name') {{concept.payload.Name}}
       small(class='date') {{concept.payload.GenerationDate__c}}
     h3 by {{concept.payload.Author__c}}
     p {{concept.payload.Abstract__c}}
@@ -17,3 +17,7 @@ div(class='box hovered')
     p {{concept.payload.Body__c}}
 h1 Market Trend
 div(id='chart')
+h1 Chatter About This
+div(id='search')
+  input(type='text' id='message-bar' placeholder='Chatter Message')
+  input(type='submit' id='message-go' value='send')
