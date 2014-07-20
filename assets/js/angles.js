@@ -1,23 +1,34 @@
+var monthConverter = function(index) {
+  var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  return months[index];
+}
+var deindexer = function(index) {
+  var arr = []
+  for(var i=index;i<13;++i){
+    arr.push(monthConverter(i-1));
+  }
+  for(var i=1;i<index;++i){
+    arr.push(monthConverter(i-1));
+  }
+  console.log(arr);
+  return arr;
+} 
+
 var generateC3Graph = function(bind, data, width) {
   var chart = c3.generate({
     bindto: bind,
     data: {
-      x: 'x',
       columns: [
-        ['x', '2014-01-01', '2014-02-01', '2014-03-01', '2014-04-01', '2014-05-01', '2014-06-01', '2014-07-01', '2014-08-01', '2014-09-01', '2014-10-01', '2014-11-01', '2014-12-01'],
         (['data1']).concat(data)
       ],
       types: {
-        data1: 'area',
-        data2: 'area'
+        data1: 'area'
       }
     },
     axis: {
       x: {
-        type: 'timeseries',
-        tick: {
-          format: function (x) { return x.getMonth(); }
-        }
+        type: 'category',
+        categories: deindexer(moment().month()+2),
       }
     },
     size: {
@@ -101,12 +112,10 @@ inHouseApp.controller('FeaturedCtrl', function($scope, $http, $q) {
               if(concepts.length==records.length){
                 deferred.resolve(concepts);
                 deferred.promise.then(function(concepts_data){
-                  console.log(concepts_data[0].payload.TotalTokens__c);
                   concepts_data.sort(function(a, b){
-                    return a.payload.TotalTokens__c < b.payload.TotalTokens__c;
+                    return b.payload.TotalTokens__c - a.payload.TotalTokens__c;
                   });
-                  console.log(concepts_data);
-                  $scope.concepts = concepts_data;
+                  $scope.concepts = concepts_data.slice(0, 3);
                 });
               }
             }
@@ -137,10 +146,10 @@ inHouseApp.controller('PopularCtrl', function($scope, $http, $q) {
                 deferred.resolve(concepts);
                 deferred.promise.then(function(concepts_data){
                   concepts_data.sort(function(a, b){
-                    return a.payload.TotalTokens__c < b.payload.TotalTokens__c;
+                    return b.payload.TotalTokens__c - a.payload.TotalTokens__c;
                   });
                   console.log(concepts_data);
-                  $scope.concepts = concepts_data;
+                  $scope.concepts = concepts_data.slice(0, 5);
                 })
               }
             }
@@ -171,10 +180,9 @@ inHouseApp.controller('RecentCtrl', function($scope, $http, $q) {
                 deferred.resolve(concepts);
                 deferred.promise.then(function(concepts_data){
                   concepts_data.sort(function(a, b){
-                    return a.payload.CreatedDate < b.payload.CreatedDate;
+                    return moment(b.payload.GenerationDate__c) - moment(a.payload.GenerationDate__c);
                   });
-                  console.log(concepts_data);
-                  $scope.concepts = concepts_data;
+                  $scope.concepts = concepts_data.slice(0, 5);
                 })
               }
             }
@@ -183,10 +191,47 @@ inHouseApp.controller('RecentCtrl', function($scope, $http, $q) {
       }
     }});
 });
-inHouseApp.controller('SearchCtrl', function($scope) {
+inHouseApp.controller('SearchCtrl', function($scope, $q) {
   $scope.reference_name = 'results';
-  var query = 'SELECT+name+FROM+Concept__c';
-  console.log(get_concept_group(sr, query));
+  $('#search-go').click(function(){
+    var search_term = $('#search-bar').val();
+    console.log(search_term);
+    var deferred = $q.defer();
+    var query = 'SELECT+name+FROM+Concept__c';
+    var url = sr.context.links.queryUrl + "?q=" + query;
+    var concepts = [];
+    Sfdc.canvas.client.ajax(url,
+      {client: sr.client,
+      success: function(data){
+        if (data.status == 200) {
+          var records = data.payload.records;
+          for(i=0;i<records.length;++i){
+            Sfdc.canvas.client.ajax(records[i].attributes.url,
+            {client: sr.client,
+            success: function(data2){
+              if (data2.status == 200) {
+                concepts.push(data2);
+                if(concepts.length==records.length){
+                  deferred.resolve(concepts);
+                  deferred.promise.then(function(concepts_data){
+                    var filtered = []
+                    for(var k=0;k<concepts_data.length;++k){
+                      if ((concepts_data[k].payload.Name.toLowerCase()).indexOf(search_term.toLowerCase()) > -1){
+                        filtered.push(concepts_data[k]);
+                      }
+                    }
+                    filtered.sort(function(a, b){
+                      return b.payload.TotalTokens__c - a.payload.TotalTokens__c;
+                    });
+                    $scope.concepts = filtered;
+                  });
+                }
+              }
+            }});
+          }
+        }
+      }});
+  })
 });
 inHouseApp.controller('ProfileCtrl', function($scope, $q) {
   $scope.reference_name = 'profile';
@@ -216,8 +261,8 @@ inHouseApp.controller('ProfileCtrl', function($scope, $q) {
                 deferred.resolve(concepts);
                 deferred.promise.then(function(concepts_data){
                   console.log(concepts_data);
-                  // add sorting code
-                  $scope.concepts = concepts_data;
+                  // add sorting code ?>???>??>>>??
+                  $scope.concepts = concepts_data.slice(0, 5);
                 });
               }
             }
@@ -241,15 +286,14 @@ inHouseApp.controller('ConceptViewCtrl', function($scope, $location, $q) {
       if (data.status == 200) {
         deferred.resolve(data);
         deferred.promise.then(function(data){
-          console.log(data);
           $scope.concept = data;
+          var width = $('.box').width();
+          var chart_data = data.payload.PastTokens__c.split(',');
+          var chart = generateC3Graph('#chart', chart_data, width);
         })
       }
     }
   });
-  var width = $('.box').width();
-  var data = [30, 200, 100, 400, 150, 250, 30, 30, 40, 50, 100, 120];
-  var chart = generateC3Graph('#chart', data, width);
   $(".buy-stock").click(function(){
      /* var deferred = $q.defer();
     Sfdc.canvas.client.ajax(concept_url,
@@ -287,6 +331,26 @@ inHouseApp.controller('ConceptViewCtrl', function($scope, $location, $q) {
         }
       });
   });
+  $("#message-go").click(function(){
+    var message = $("#message-bar").val();
+    message += ' Check out the concept ' + $(".title-name").clone().children().remove().end().text() + ' on inHouse.';
+    var body = {body: {messageSegments: [
+        {type: "Text", text: message }
+    ]}};
+    var url = sr.context.links.chatterFeedsUrl + "/news/" + sr.context.user.userId + "/feed-items";
+    Sfdc.canvas.client.ajax(url,
+      {client: sr.client,
+          method: 'POST',
+          contentType: "application/json",
+          data: JSON.stringify(body),
+          success: function (data) {
+              if (201 === data.status) {
+                  console.log("Success");
+                  $("#message-bar").val('');
+              }
+          }
+      });
+  })
 });
 inHouseApp.controller('ConceptAddCtrl', function($scope, $location) {
   var today = new Date();
