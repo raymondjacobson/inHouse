@@ -211,6 +211,12 @@ inHouseApp.controller('ConceptViewCtrl', function($scope, $location, $q) {
   var width = $('.box').width();
   var data = [30, 200, 100, 400, 150, 250, 30, 30, 40, 50, 100, 120];
   var chart = generateC3Graph('#chart', data, width);
+  $(".buy-stock").click(function(){
+    var body = 
+    console.log("Good for you!");
+    sf_PATCH(sr, url, body);
+    // $location.path('/featured');
+  });
 });
 inHouseApp.controller('ConceptAddCtrl', function($scope, $location) {
   var today = new Date();
@@ -240,7 +246,7 @@ inHouseApp.controller('ConceptAddCtrl', function($scope, $location) {
     "', 'Author__c' : '"+author+"'}";
   $('.submit').click(function(){
     console.log(body);
-    sf_POST(sr, url, body);
+    // sf_POST(sr, url, body);
     // $location.path('/featured');
   });
 });
