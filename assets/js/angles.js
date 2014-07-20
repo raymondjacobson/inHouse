@@ -261,7 +261,6 @@ inHouseApp.controller('ProfileCtrl', function($scope, $q) {
                 deferred.resolve(concepts);
                 deferred.promise.then(function(concepts_data){
                   console.log(concepts_data);
-                  // add sorting code ?>???>??>>>??
                   $scope.concepts = concepts_data.slice(0, 5);
                 });
               }
@@ -271,7 +270,7 @@ inHouseApp.controller('ProfileCtrl', function($scope, $q) {
       }
     }});
 });
-inHouseApp.controller('ConceptViewCtrl', function($scope, $location, $q) {
+inHouseApp.controller('ConceptViewCtrl', function($route, $scope, $location, $q) {
   console.log($location.path());
   $scope.reference_name = 'view concept';
   var deferred = $q.defer();
@@ -295,26 +294,15 @@ inHouseApp.controller('ConceptViewCtrl', function($scope, $location, $q) {
     }
   });
   $(".buy-stock").click(function(){
-     /* var deferred = $q.defer();
-    Sfdc.canvas.client.ajax(concept_url,
-      {client: sr.client,
-      success: function(data){
-        if (data.status == 200) {
-          deferred.resolve(data);
-          deferred.promise.then(function(data){
-            console.log(data);
-            $scope.concept = data;
-          })
-        }
-      }
-    });*/
     console.log("Good for you!");
     var quantity = $('.small').val();
     var diff = parseInt(quantity, 10);
     quantity = parseInt(quantity, 10);
-    var concept_body = {"TotalTokens__c": quantity + $scope.concept.payload.TotalTokens__c};
+    console.log(quantity/($scope.concept.payload.TotalTokens__c/11.5) + $scope.concept.payload.TotalTokens__c);
+    var concept_body = {"TotalTokens__c": quantity/($scope.concept.payload.TotalTokens__c/11.5) + $scope.concept.payload.TotalTokens__c};
     sf_PATCH(sr, concept_url, concept_body);
-
+    var new_vals = quantity/($scope.concept.payload.TotalTokens__c/11.5) + $scope.concept.payload.TotalTokens__c;
+    $scope.concept.payload.TotalTokens__c = quantity/($scope.concept.payload.TotalTokens__c/11.5) + $scope.concept.payload.TotalTokens__c;
     var get_user_tokens_url = "/services/data/v29.0/query?q=SELECT+Tokens__c+,+UserId__c+FROM+UserTokens__c+WHERE+UserId__c+=+'"+sr.userId+"'";
     console.log(get_user_tokens_url);
     Sfdc.canvas.client.ajax(get_user_tokens_url,
@@ -325,6 +313,7 @@ inHouseApp.controller('ConceptViewCtrl', function($scope, $location, $q) {
             var user_body = {
               "Tokens__c": current + quantity*-1
             };
+            $('.ctok').html("tokens: "+(Math.round(new_vals).toString()));
             var user_url = token_data.payload.records[0].attributes.url;
             sf_PATCH(sr, user_url, user_body);
           }

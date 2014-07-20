@@ -10,4 +10,4 @@ a(ng-repeat="concept in concepts" href='#concept/{{concept.payload.Id}}')
       p {{concept.payload.Abstract__c}}
       p
         em(class='tokens green') cost: 100
-        em(class='tokens green') tokens: {{concept.payload.TotalTokens__c}}
+        em(class='tokens green') tokens: {{concept.payload.TotalTokens__c | number:0}}

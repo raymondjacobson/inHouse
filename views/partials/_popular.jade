@@ -9,8 +9,8 @@ a(ng-repeat="concept in concepts" href='#concept/{{concept.payload.Id}}')
         small(class='date') {{concept.payload.GenerationDate__c}}
       p {{concept.payload.Abstract__c}}
       p
-        em(class='tokens green') cost: 100
-        em(class='tokens green') tokens: {{concept.payload.TotalTokens__c}}
+        em(class='tokens green') rate: {{(concept.payload.TotalTokens__c/11.5) | number:0}}
+        em(class='tokens green') tokens: {{concept.payload.TotalTokens__c | number:0}}
 
 div(id='chart')     
 

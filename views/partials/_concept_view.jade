@@ -7,10 +7,10 @@ div(class='box hovered')
     h3 by {{concept.payload.Author__c}}
     p {{concept.payload.Abstract__c}}
     p
-      em(class='tokens green') cost: 100
-      em(class='tokens green') tokens: {{concept.payload.TotalTokens__c}}
-    p You own
-      input(type='text' class='small' value='100')
+      em(class='tokens green') rate: {{(concept.payload.TotalTokens__c/11.5) | number:0}}
+      em(class='tokens green ctok') tokens: {{concept.payload.TotalTokens__c | number:0}}
+    p Invest tokens?
+      input(type='text' class='small' value='{{(concept.payload.TotalTokens__c/11.5) | number:0}}')
       em(class='tokens blue buy-stock') make deal
   div(class='details cf')
     h2 Details
