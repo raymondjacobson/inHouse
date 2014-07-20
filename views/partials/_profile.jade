@@ -20,3 +20,4 @@ a(ng-repeat="concept in concepts" href='#concept/{{concept.payload.Id}}/edit')
       p
         em(class='tokens green') Support {{(concept.payload.TotalTokens__c/11.5) | number:0}}:1
         em(class='tokens green') Tokens: {{concept.payload.TotalTokens__c | number:0}}
+        em(class='following tokens orange') Supporting

@@ -322,6 +322,7 @@ inHouseApp.controller('ConceptViewCtrl', function($route, $scope, $location, $q)
     $scope.concept.payload.TotalTokens__c = quantity/($scope.concept.payload.TotalTokens__c/11.5) + $scope.concept.payload.TotalTokens__c;
     var get_user_tokens_url = "/services/data/v29.0/query?q=SELECT+Tokens__c+,+UserId__c+FROM+UserTokens__c+WHERE+UserId__c+=+'"+sr.userId+"'";
     console.log(get_user_tokens_url);
+    $('.ctok').html("Tokens: "+(Math.round(new_vals).toString()));
     Sfdc.canvas.client.ajax(get_user_tokens_url,
       {client: sr.client,
       success: function(token_data){
@@ -330,7 +331,6 @@ inHouseApp.controller('ConceptViewCtrl', function($route, $scope, $location, $q)
             var user_body = {
               "Tokens__c": current + quantity*-1
             };
-            $('.ctok').html("tokens: "+(Math.round(new_vals).toString()));
             var user_url = token_data.payload.records[0].attributes.url;
             sf_PATCH(sr, user_url, user_body);
           }

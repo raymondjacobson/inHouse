@@ -8,7 +8,7 @@ div(class='box hovered')
     p {{concept.payload.Abstract__c}}
     p
       em(class='tokens green') Support {{(concept.payload.TotalTokens__c/11.5) | number:0}}:1
-      em(class='tokens green') Tokens: {{concept.payload.TotalTokens__c | number:0}}
+      em(class='tokens green ctok') Tokens: {{concept.payload.TotalTokens__c | number:0}}
     p Invest tokens?
       input(type='text' class='small' value='{{(concept.payload.TotalTokens__c/11.5) | number:0}}')
       em(class='tokens blue buy-stock') make deal

@@ -40,6 +40,10 @@ p em.blue {
   border: 1px solid #34a8f3;
   color: #34a8f3;
 }
+p em.orange {
+  border: 1px solid #ec7e71;
+  color: #ec7e71;
+}
 small {
   color: #3394d3;
   font-size: 10px;
