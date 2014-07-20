@@ -1,4 +1,5 @@
 h1 {{reference_name}}
+
 h1(ng-repeat="concept in concepts")
   a(href='#concept/1')
     div(class='box')
@@ -11,6 +12,7 @@ h1(ng-repeat="concept in concepts")
         p
           em(class='tokens green') cost: 100
           em(class='tokens green') tokens: {{concept.payload.TotalTokens__c}}
+
 div(id='chart')     
 
         

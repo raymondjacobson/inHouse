@@ -179,14 +179,43 @@ inHouseApp.controller('SearchCtrl', function($scope) {
   var query = 'SELECT+name+FROM+Concept__c';
   console.log(get_concept_group(sr, query));
 });
-inHouseApp.controller('ProfileCtrl', function($scope) {
+inHouseApp.controller('ProfileCtrl', function($scope, $q) {
   $scope.reference_name = 'profile';
   $scope.first_name = sr.context.user.firstName;
   $scope.last_name = sr.context.user.lastName;
   $scope.email = sr.context.user.email;
   $scope.tokens = 100;
-  var query = 'SELECT+name+FROM+Concept__c';
-  console.log(get_concept_group(sr, query));
+  var deferred = $q.defer();
+  $scope.reference_name = 'featured';
+  var query = "SELECT+name+FROM+Concept__c+WHERE+CreatedById+=+'"+sr.context.user.userId+"'";
+  var url = sr.context.links.queryUrl + "?q=" + query;
+  console.log(url);
+  var concepts = [];
+  Sfdc.canvas.client.ajax(url,
+    {client: sr.client,
+    success: function(data){
+      if (data.status == 200) {
+        var records = data.payload.records;
+        for(i=0;i<records.length;++i){
+          console.log(records[i].attributes.url);
+          Sfdc.canvas.client.ajax(records[i].attributes.url,
+          {client: sr.client,
+          success: function(data2){
+            if (data2.status == 200) {
+              concepts.push(data2);
+              if(concepts.length==records.length){
+                deferred.resolve(concepts);
+                deferred.promise.then(function(concepts_data){
+                  console.log(concepts_data);
+                  // add sorting code
+                  $scope.concepts = concepts_data;
+                });
+              }
+            }
+          }});
+        }
+      }
+    }});
 });
 inHouseApp.controller('ConceptViewCtrl', function($scope, $location, $q) {
   console.log($location.path());
