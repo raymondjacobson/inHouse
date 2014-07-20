@@ -82,41 +82,32 @@ inHouseApp.controller('Ctrl', function($scope) {});//default scope
 
 inHouseApp.controller('FeaturedCtrl', function($scope) {
   $scope.reference_name = 'featured';
-  var url = "/services/data/v29.0/query?q=SELECT+quantity__c+FROM+egg__c";
-  console.log(url);
-  Sfdc.canvas.client.ajax(url,
-    {client: sr.client,
-    success: function(data){
-      console.log(data);
-      if (data.status == 200) {
-        console.log('success');
-      }
-    }});
-  url = "/services/data/v29.0/sobjects/egg__c";
-  var body = {"Name": "matt", "quantity__c": "1220"};
-  Sfdc.canvas.client.ajax(url,
-    {client: sr.client,
-      method: 'POST',
-      contentType: "application/json",
-      data: JSON.stringify(body),
-      success: function(data) {
-        if (201 === data.status) {
-          console.log("Success");
-        }
-      }
-    });
+  var query = 'SELECT+quantity__c+FROM+egg__c';
+  console.log(get_concept_group(sr, query));
 });
 inHouseApp.controller('PopularCtrl', function($scope) {
   $scope.reference_name = 'popular';
+  var query = '';
+  console.log(get_concept_group(sr, query));
 });
 inHouseApp.controller('RecentCtrl', function($scope) {
   $scope.reference_name = 'recent';
+  var query = '';
+  console.log(get_concept_group(sr, query));
 });
 inHouseApp.controller('SearchCtrl', function($scope) {
   $scope.reference_name = 'results';
+  var query = '';
+  console.log(get_concept_group(sr, query));
 });
 inHouseApp.controller('ProfileCtrl', function($scope) {
   $scope.reference_name = 'profile';
+  $scope.first_name = sr.context.user.firstName;
+  $scope.last_name = sr.context.user.lastName;
+  $scope.email = sr.context.user.email;
+  $scope.tokens = 100;
+  var query = '';
+  console.log(get_concept_group(sr, query));
 });
 inHouseApp.controller('ConceptViewCtrl', function($scope) {
   $scope.reference_name = 'view concept';
@@ -126,6 +117,9 @@ inHouseApp.controller('ConceptViewCtrl', function($scope) {
 });
 inHouseApp.controller('ConceptAddCtrl', function($scope) {
   $scope.reference_name = 'add concept';
+  var url = "/services/data/v29.0/sobjects/egg__c";
+  var body = {"Name": "matt2", "quantity__c": "1220"};
+  sf_POST(sr, url, body);
 });
 inHouseApp.controller('ConceptEditCtrl', function($scope) {
   $scope.reference_name = 'edit concept';
