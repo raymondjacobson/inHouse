@@ -113,7 +113,7 @@ inHouseApp.controller('FeaturedCtrl', function($scope, $http, $q) {
                 deferred.resolve(concepts);
                 deferred.promise.then(function(concepts_data){
                   concepts_data.sort(function(a, b){
-                    return b.payload.TotalTokens__c - a.payload.TotalTokens__c;
+                    return b.payload.Abstract__c - a.payload.Abstract__c;
                   });
                   $scope.concepts = concepts_data.slice(0, 3);
                 });
