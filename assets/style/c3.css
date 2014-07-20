@@ -5,7 +5,7 @@
 }
 .c3 path, .c3 line {
   fill: none;
-  stroke: #b2b2b2;
+  stroke: #f3f3f3;
 }
 .c3 text {
   -webkit-user-select: none;
@@ -34,29 +34,29 @@
 
 .c3-axis-x .tick {
   fill: none;
-  stroke: #b2b2b2;
+  stroke: #f3f3f3;
 }
 .c3-axis-x-label {
   fill: none;
-  stroke: #b2b2b2;
+  stroke: #f3f3f3;
 }
 
 .c3-axis-y .tick {
   fill: none;
-  stroke: #b2b2b2;
+  stroke: #f3f3f3;
 }
 .c3-axis-y-label {
   fill: none;
-  stroke: #b2b2b2;
+  stroke: #f3f3f3;
 }
 
 .c3-axis-y2 .tick {
   fill: none;
-  stroke: #b2b2b2;
+  stroke: #f3f3f3;
 }
 .c3-axis-y2-label {
   fill: none;
-  stroke: #b2b2b2;
+  stroke: #f3f3f3;
 }
 
 /*-- Grid --*/
@@ -199,7 +199,7 @@
   stroke: none;
 }
 .c3-chart-arcs .c3-chart-arcs-gauge-unit {
-  fill: #b2b2b2;
+  fill: #f3f3f3;
   font-size: 16px;
 }
 .c3-chart-arcs .c3-chart-arcs-gauge-max {
@@ -210,6 +210,6 @@
 }
 
 .c3-chart-arc .c3-gauge-value {
-  fill: #b2b2b2;
+  fill: #f3f3f3;
   font-size: 28px;
 }
