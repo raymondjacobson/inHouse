@@ -1,23 +1,34 @@
+var monthConverter = function(index) {
+  var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  return months[index];
+}
+var deindexer = function(index) {
+  var arr = []
+  for(var i=index;i<13;++i){
+    arr.push(monthConverter(i-1));
+  }
+  for(var i=1;i<index;++i){
+    arr.push(monthConverter(i-1));
+  }
+  console.log(arr);
+  return arr;
+} 
+
 var generateC3Graph = function(bind, data, width) {
   var chart = c3.generate({
     bindto: bind,
     data: {
-      x: 'x',
       columns: [
-        ['x', '2014-01-01', '2014-02-01', '2014-03-01', '2014-04-01', '2014-05-01', '2014-06-01', '2014-07-01', '2014-08-01', '2014-09-01', '2014-10-01', '2014-11-01', '2014-12-01'],
         (['data1']).concat(data)
       ],
       types: {
-        data1: 'area',
-        data2: 'area'
+        data1: 'area'
       }
     },
     axis: {
       x: {
-        type: 'timeseries',
-        tick: {
-          format: function (x) { return x.getMonth(); }
-        }
+        type: 'category',
+        categories: deindexer(moment().month()+2),
       }
     },
     size: {
@@ -101,17 +112,9 @@ inHouseApp.controller('FeaturedCtrl', function($scope, $http, $q) {
               if(concepts.length==records.length){
                 deferred.resolve(concepts);
                 deferred.promise.then(function(concepts_data){
-                  for(var i =0; i<concepts_data.length; ++i){
-                    console.log(concepts_data[i].payload.TotalTokens__c);
-                  }
                   concepts_data.sort(function(a, b){
-                    // console.log(a.payload.TotalTokens__c < b.payload.TotalTokens__c);
                     return b.payload.TotalTokens__c - a.payload.TotalTokens__c;
                   });
-                  console.log('-----');
-                  for(var i =0; i<concepts_data.length; ++i){
-                    console.log(concepts_data[i].payload.TotalTokens__c);
-                  }
                   $scope.concepts = concepts_data.slice(0, 3);
                 });
               }
