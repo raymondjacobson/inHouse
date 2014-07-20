@@ -131,14 +131,12 @@ input:-ms-input-placeholder {
   -o-transition: color 0.3s linear;
   color: #b2b2b2;
 }
-input#search-bar:before {
-  position: absolute;
-  font-family: FontAwesome;
-  font-style: normal;
-  font-weight: normal;
-  top: 0;
-  left: -5px;
-  content: "\f002";
+input#search-bar {
+  width: 84%;
+  margin-right: 2%;
+}
+input#search-go {
+  width: 14%;
 }
 input,
 textarea {

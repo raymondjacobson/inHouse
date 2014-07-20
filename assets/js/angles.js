@@ -191,10 +191,47 @@ inHouseApp.controller('RecentCtrl', function($scope, $http, $q) {
       }
     }});
 });
-inHouseApp.controller('SearchCtrl', function($scope) {
+inHouseApp.controller('SearchCtrl', function($scope, $q) {
   $scope.reference_name = 'results';
-  var query = 'SELECT+name+FROM+Concept__c';
-  console.log(get_concept_group(sr, query));
+  $('#search-go').click(function(){
+    var search_term = $('#search-bar').val();
+    console.log(search_term);
+    var deferred = $q.defer();
+    var query = 'SELECT+name+FROM+Concept__c';
+    var url = sr.context.links.queryUrl + "?q=" + query;
+    var concepts = [];
+    Sfdc.canvas.client.ajax(url,
+      {client: sr.client,
+      success: function(data){
+        if (data.status == 200) {
+          var records = data.payload.records;
+          for(i=0;i<records.length;++i){
+            Sfdc.canvas.client.ajax(records[i].attributes.url,
+            {client: sr.client,
+            success: function(data2){
+              if (data2.status == 200) {
+                concepts.push(data2);
+                if(concepts.length==records.length){
+                  deferred.resolve(concepts);
+                  deferred.promise.then(function(concepts_data){
+                    var filtered = []
+                    for(var k=0;k<concepts_data.length;++k){
+                      if ((concepts_data[k].payload.Name.toLowerCase()).indexOf(search_term.toLowerCase()) > -1){
+                        filtered.push(concepts_data[k]);
+                      }
+                    }
+                    filtered.sort(function(a, b){
+                      return b.payload.TotalTokens__c - a.payload.TotalTokens__c;
+                    });
+                    $scope.concepts = filtered;
+                  });
+                }
+              }
+            }});
+          }
+        }
+      }});
+  })
 });
 inHouseApp.controller('ProfileCtrl', function($scope, $q) {
   $scope.reference_name = 'profile';
