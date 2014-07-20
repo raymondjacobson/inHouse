@@ -318,6 +318,12 @@ a .box {
   background: #34a8f3;
   border: none;
 }
+.box.box-profile h1,
+.box.box-profile h2,
+.box.box-profile p,
+.box.box-profile small {
+  color: #333;
+}
 .box.box-profile i {
-  color: #cbcbcb;
+  color: #333;
 }
