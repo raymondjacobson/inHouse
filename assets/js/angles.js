@@ -102,8 +102,9 @@ inHouseApp.controller('FeaturedCtrl', function($scope, $http, $q) {
                 deferred.resolve(concepts);
                 deferred.promise.then(function(concepts_data){
                   console.log(concepts_data);
+                  // add sorting code
                   $scope.concepts = concepts_data;
-                })
+                });
               }
             }
           }});
@@ -187,22 +188,61 @@ inHouseApp.controller('ProfileCtrl', function($scope) {
   var query = 'SELECT+name+FROM+Concept__c';
   console.log(get_concept_group(sr, query));
 });
-inHouseApp.controller('ConceptViewCtrl', function($scope) {
+inHouseApp.controller('ConceptViewCtrl', function($scope, $location, $q) {
+  console.log($location.path());
   $scope.reference_name = 'view concept';
+  var deferred = $q.defer();
+  var loc_params = $location.path().split('/');
+  var id = loc_params[loc_params.length-1];
+  var url = '/services/data/v31.0/sobjects/Concept__c/'+ id;
+  var concepts = [];
+  Sfdc.canvas.client.ajax(url,
+    {client: sr.client,
+    success: function(data){
+      if (data.status == 200) {
+        deferred.resolve(data);
+        deferred.promise.then(function(data){
+          console.log(data);
+          $scope.concept = data;
+        })
+      }
+    }
+  });
   var width = $('.box').width();
   var data = [30, 200, 100, 400, 150, 250, 30, 30, 40, 50, 100, 120];
   var chart = generateC3Graph('#chart', data, width);
 });
-inHouseApp.controller('ConceptAddCtrl', function($scope) {
+inHouseApp.controller('ConceptAddCtrl', function($scope, $location) {
+  var today = new Date();
+  var dd = today.getDate();
+  var mm = today.getMonth()+1; //January is 0!
+  var yyyy = today.getFullYear();
+  if(dd<10) {
+      dd='0'+dd
+  } 
+
+  if(mm<10) {
+      mm='0'+mm
+  } 
+  today = yyyy+'/'+mm+'/'+dd;
   $scope.reference_name = 'add concept';
   var url = "/services/data/v29.0/sobjects/Concept__c";
   var data_title = $('.data-title').val()
+  console.log(data_title);
   var data_abstract = $('.data-abstract').val()
   var data_body = $('.data-body').val()
   var data_tags = $('.data-tags').val()
   var author = sr.context.user.firstName + ' ' + sr.context.user.lastNameh
-  var body = '{"name": "beer", "Abstract__c": "s", "GenerationDate__c": "02/21/2011", "TotalTokens__c" : "5", "ExpirationDate__c": "2015-12-02", “Body__c”: “stuff”, “Author__c” : “n”}'
-  sf_POST(sr, url, body);
+  var body = "{'name': '"+data_title+
+    "', 'Abstract__c': '"+data_abstract+
+    "', 'GenerationDate__c': '"+today+
+    "', 'TotalTokens__c' : '1', 'ExpirationDate__c': '2016-12-02', 'Body__c': '"+data_body+
+    "', 'Author__c' : '"+author+"'}";
+  $('.submit').click(function(){
+    console.log(body);
+    sf_POST(sr, url, body);
+    // $location.path('/featured');
+  });
 });
 inHouseApp.controller('ConceptEditCtrl', function($scope) {
   $scope.reference_name = 'edit concept';
