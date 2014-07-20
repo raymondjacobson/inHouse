@@ -219,6 +219,9 @@ inHouseApp.controller('SearchCtrl', function($scope, $q) {
                       if ((concepts_data[k].payload.Name.toLowerCase()).indexOf(search_term.toLowerCase()) > -1){
                         filtered.push(concepts_data[k]);
                       }
+                      if ((concepts_data[k].payload.Author__c.toLowerCase()).indexOf(search_term.toLowerCase()) > -1){
+                        filtered.push(concepts_data[k]);
+                      }
                     }
                     filtered.sort(function(a, b){
                       return b.payload.TotalTokens__c - a.payload.TotalTokens__c;
@@ -300,7 +303,7 @@ inHouseApp.controller('ConceptViewCtrl', function($route, $scope, $location, $q)
         deferred.resolve(data);
         deferred.promise.then(function(data){
           $scope.concept = data;
-          var width = $('.box').width();
+          var width = $('.box').width()*1.1;
           var chart_data = data.payload.PastTokens__c.split(',');
           var chart = generateC3Graph('#chart', chart_data, width);
         })

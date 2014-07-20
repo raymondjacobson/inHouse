@@ -12,7 +12,7 @@ h2 {
   text-transform: uppercase;
   margin: 10px 0px 0px 0px;
   padding: 0;
-  color: #cbcbcb;
+  color: #e0e0e0;
 }
 h3 {
   font-size: 12px;
@@ -20,7 +20,7 @@ h3 {
   letter-spacing: 2px;
   margin: 0;
   padding: 0;
-  color: #cbcbcb;
+  color: #e0e0e0;
 }
 p {
   margin: 0;
@@ -37,8 +37,8 @@ p em.green {
   color: #82c087;
 }
 p em.blue {
-  border: 1px solid #3394d3;
-  color: #3394d3;
+  border: 1px solid #34a8f3;
+  color: #34a8f3;
 }
 small {
   color: #3394d3;
@@ -50,13 +50,13 @@ small {
 html,
 body {
   height: 100%;
-  background: #191919;
+  background: #333;
 }
 body {
   padding: 0;
   margin: 0;
   font-family: 'Lato', Helvetica, sans-serif;
-  color: #b2b2b2;
+  color: #cbcbcb;
 }
 .push {
   height: 60px;
@@ -95,7 +95,7 @@ input::-webkit-input-placeholder {
   -moz-transition: color 0.3s linear;
   -ms-transition: color 0.3s linear;
   -o-transition: color 0.3s linear;
-  color: #b2b2b2;
+  color: #cbcbcb;
 }
 input:focus::-webkit-input-placeholder,
 input:hover::-webkit-input-placeholder {
@@ -118,21 +118,21 @@ input:-moz-placeholder {
   -moz-transition: color 0.3s linear;
   -ms-transition: color 0.3s linear;
   -o-transition: color 0.3s linear;
-  color: #b2b2b2;
+  color: #cbcbcb;
 }
 input::-moz-placeholder {
   -webkit-transition: color 0.3s linear;
   -moz-transition: color 0.3s linear;
   -ms-transition: color 0.3s linear;
   -o-transition: color 0.3s linear;
-  color: #b2b2b2;
+  color: #cbcbcb;
 }
 input:-ms-input-placeholder {
   -webkit-transition: color 0.3s linear;
   -moz-transition: color 0.3s linear;
   -ms-transition: color 0.3s linear;
   -o-transition: color 0.3s linear;
-  color: #b2b2b2;
+  color: #cbcbcb;
 }
 input#search-bar {
   width: 84%;
@@ -163,14 +163,14 @@ textarea {
   -o-transition: all 0.3s linear;
   width: 100%;
   margin: 0 auto 20px;
-  border: 3px solid #b2b2b2;
+  border: 3px solid #cbcbcb;
   font-size: 14px;
   text-transform: uppercase;
   font-weight: bold;
   letter-spacing: 2px;
   text-align: center;
   padding: 8px 0px;
-  color: #b2b2b2;
+  color: #cbcbcb;
   background: #191919;
 }
 input:hover,
@@ -214,11 +214,11 @@ button {
   text-align: center;
   padding: 15px 0px;
   color: #191919;
-  background: #b2b2b2;
+  background: #cbcbcb;
 }
 button:hover,
 button:focus {
-  background: #3394d3;
+  background: #34a8f3;
   outline: 0;
 }
 .buy-stock {
@@ -229,14 +229,14 @@ button:focus {
   -o-transition: all 0.3s linear;
 }
 .buy-stock:hover {
-  border-color: #5ca9dc;
-  color: #5ca9dc;
+  border-color: #5db9f5;
+  color: #5db9f5;
 }
 #nav {
   position: fixed;
   bottom: 0;
   width: 100%;
-  background: rgba(3,3,3,0.6);
+  background: rgba(3,3,3,0.8);
   border-top: 1px solid #4c4c4c;
   text-align: center;
   margin: 0 auto;
@@ -255,7 +255,7 @@ button:focus {
   -ms-transition: all 0.3s linear;
   -o-transition: all 0.3s linear;
   text-decoration: none;
-  color: #b2b2b2;
+  color: #cbcbcb;
 }
 #nav a:hover {
   color: #3394d3;
@@ -272,11 +272,11 @@ button:focus {
   font-weight: 300;
 }
 #nav a.index {
-  background: #252525;
+  background: #333;
   color: #3394d3;
 }
 a .box {
-  color: #b2b2b2;
+  color: #cbcbcb;
 }
 .box {
   cursor: pointer;
@@ -286,12 +286,12 @@ a .box {
   margin: 20px auto;
   padding: 20px 5% 10px;
   width: 100%;
-  background: #333;
+  background: #4c4c4c;
   border: 3px solid #333;
 }
 .box:hover,
 .box.hovered {
-  border: 3px solid #b2b2b2;
+  border: 3px solid #cbcbcb;
   background: none;
 }
 .box .thumb {
@@ -315,9 +315,9 @@ a .box {
   display: inline-block;
 }
 .box.box-profile {
-  background: #3394d3;
+  background: #34a8f3;
   border: none;
 }
 .box.box-profile i {
-  color: #b2b2b2;
+  color: #cbcbcb;
 }
