@@ -111,15 +111,67 @@ inHouseApp.controller('FeaturedCtrl', function($scope, $http, $q) {
       }
     }});
 });
-inHouseApp.controller('PopularCtrl', function($scope) {
+inHouseApp.controller('PopularCtrl', function($scope, $http, $q) {
+  var deferred = $q.defer();
   $scope.reference_name = 'popular';
   var query = 'SELECT+name+FROM+Concept__c';
-  console.log(get_concept_group(sr, query));
+  var url = sr.context.links.queryUrl + "?q=" + query;
+  var concepts = [];
+  Sfdc.canvas.client.ajax(url,
+    {client: sr.client,
+    success: function(data){
+      if (data.status == 200) {
+        var records = data.payload.records;
+        for(i=0;i<records.length;++i){
+          console.log(records[i].attributes.url);
+          Sfdc.canvas.client.ajax(records[i].attributes.url,
+          {client: sr.client,
+          success: function(data2){
+            if (data2.status == 200) {
+              concepts.push(data2);
+              if(concepts.length==records.length){
+                deferred.resolve(concepts);
+                deferred.promise.then(function(concepts_data){
+                  console.log(concepts_data);
+                  $scope.concepts = concepts_data;
+                })
+              }
+            }
+          }});
+        }
+      }
+    }});
 });
-inHouseApp.controller('RecentCtrl', function($scope) {
+inHouseApp.controller('RecentCtrl', function($scope, $http, $q) {
+  var deferred = $q.defer();
   $scope.reference_name = 'recent';
   var query = 'SELECT+name+FROM+Concept__c';
-  console.log(get_concept_group(sr, query));
+  var url = sr.context.links.queryUrl + "?q=" + query;
+  var concepts = [];
+  Sfdc.canvas.client.ajax(url,
+    {client: sr.client,
+    success: function(data){
+      if (data.status == 200) {
+        var records = data.payload.records;
+        for(i=0;i<records.length;++i){
+          console.log(records[i].attributes.url);
+          Sfdc.canvas.client.ajax(records[i].attributes.url,
+          {client: sr.client,
+          success: function(data2){
+            if (data2.status == 200) {
+              concepts.push(data2);
+              if(concepts.length==records.length){
+                deferred.resolve(concepts);
+                deferred.promise.then(function(concepts_data){
+                  console.log(concepts_data);
+                  $scope.concepts = concepts_data;
+                })
+              }
+            }
+          }});
+        }
+      }
+    }});
 });
 inHouseApp.controller('SearchCtrl', function($scope) {
   $scope.reference_name = 'results';
