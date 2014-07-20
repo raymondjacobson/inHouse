@@ -3,18 +3,18 @@ h1 {{reference_name}}
 div
   label Title
 div
-  input(type='input' value='concept1' id='data-title')
+  input(type='input' value='{{concept.payload.Name}}' id='data-title')
 div
   label Abstract
 div
-  input(type='input' value='some stupid abstract' id='data-abstract')
+  input(type='input' value='{{concept.payload.Abstract__c}}' id='data-abstract')
 div
   label Body
 div
-  textarea(id='data-body') blah blah blah body
+  textarea(id='data-body') {{concept.payload.Body__c}}
 div
   label Tags
 div
-  input(type='input' value='food, swag' id='data-tags')
+  input(type='input' value='{{concept.payload.Tags__c}}' id='data-tags')
 a(href='#profile')
   button(class='submit') Let's make some change!

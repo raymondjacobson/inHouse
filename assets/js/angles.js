@@ -274,6 +274,53 @@ inHouseApp.controller('ConceptAddCtrl', function($scope, $location) {
     sf_POST(sr, url, body);
   });
 });
-inHouseApp.controller('ConceptEditCtrl', function($scope) {
+inHouseApp.controller('ConceptEditCtrl', function($scope, $location, $q) {
   $scope.reference_name = 'edit concept';
+  var today = new Date();
+  var dd = today.getDate();
+  var mm = today.getMonth()+1; //January is 0!
+  var yyyy = today.getFullYear();
+  if(dd<10) {
+      dd='0'+dd
+  } 
+
+  if(mm<10) {
+      mm='0'+mm
+  } 
+  today = yyyy+'/'+mm+'/'+dd;
+  var deferred = $q.defer();
+  var loc_params = $location.path().split('/');
+  var id = loc_params[loc_params.length-2];
+  var url = '/services/data/v31.0/sobjects/Concept__c/'+ id;
+  var concepts = [];
+  Sfdc.canvas.client.ajax(url,
+    {client: sr.client,
+    success: function(data){
+      if (data.status == 200) {
+        deferred.resolve(data);
+        deferred.promise.then(function(data){
+          console.log(data);
+          $scope.concept = data;
+        })
+      }
+    }
+  });
+  $('.submit').click(function(){
+    var url = "/services/data/v29.0/sobjects/Concept__c";
+    var data_title = $('#data-title').val()
+    var data_abstract = $('#data-abstract').val()
+    var data_body = $('#data-body').val()
+    var data_tags = $('#data-tags').val()
+    var author = sr.context.user.firstName + ' ' + sr.context.user.lastName
+    var body = {
+      "name": data_title,
+      "Abstract__c": data_abstract,
+      "GenerationDate__c": today,
+      "TotalTokens__c" : "1",
+      "ExpirationDate__c": "2016-12-02",
+      "Body__c": data_body,
+      "Author__c" : author
+    };
+    sf_POST(sr, url, body);
+  });
 });
