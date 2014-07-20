@@ -12,6 +12,7 @@ h2 {
   text-transform: uppercase;
   margin: 0;
   padding: 0;
+  color: #cbcbcb;
 }
 p {
   margin: 0;
@@ -230,7 +231,8 @@ a .box {
   background: #333;
   border: 3px solid #333;
 }
-.box:hover {
+.box:hover,
+.box.hovered {
   border: 3px solid #b2b2b2;
   background: none;
 }
@@ -247,13 +249,17 @@ a .box {
   width: 80%;
   display: inline-block;
 }
+.box .content p {
+  margin-bottom: 10px;
+}
+.box .details {
+  width: 100%;
+  display: inline-block;
+}
 .box.box-profile {
   background: #3065a1;
   border: none;
 }
 .box.box-profile i {
   color: #b2b2b2;
-}
-#chart .c3-line-data2 {
-  stroke-width: 5px;
 }

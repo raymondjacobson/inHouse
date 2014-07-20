@@ -22,6 +22,7 @@ h2
   text-transform uppercase
   margin 0
   padding 0
+  color darken(MAIN_COLOR, 20%)
 p
   margin 0
   padding 0
@@ -42,7 +43,7 @@ body
   margin 0
   font-family 'Lato', Helvetica, sans-serif
   color darken(MAIN_COLOR, 30%)
-  // margin-bottom 180px
+  // margin-bottom 40px
 .cf
   *zoom 1
   &:after
@@ -193,7 +194,7 @@ a .box
   width 100%
   background #333
   border 3px solid #333
-  &:hover
+  &:hover, &.hovered
     border 3px solid darken(MAIN_COLOR, 30%)
     background none
   .thumb
@@ -206,11 +207,13 @@ a .box
   .content
     width 80%
     display inline-block
+    p
+      margin-bottom 10px
+  .details
+    width 100%
+    display inline-block
   &.box-profile
     background BLUE
     border none
     i
       color darken(MAIN_COLOR, 30%)
-// C3
-#chart .c3-line-data2
-  stroke-width 5px

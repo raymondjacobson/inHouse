@@ -22,6 +22,11 @@ html(ng-app='inHouseApp' class="no-js" lang="en")
     script(type="text/javascript" src="js/d3.min.js")
     script(type="text/javascript" src="js/c3.min.js")
     script(type='text/javascript' src='js/main.js')
+    script(type='text/javascript').
+        var sr = !{signedRequestJson};
+        console.log(sr);
+        Sfdc.canvas.oauth.token(sr.oauthToken);
+       
   body(ng-controller='Ctrl')
     div(id='container')
         div(id='search')

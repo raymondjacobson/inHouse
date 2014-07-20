@@ -7,5 +7,5 @@ $(document).ready(function(){
   $('#nav a').click(function(){
     $('#nav a').removeClass('index');
     $(this).addClass('index');
-  })
-})
+  });
+});

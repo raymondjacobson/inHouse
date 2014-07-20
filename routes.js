@@ -4,15 +4,14 @@ var configuration = require("./configuration");
 // Express routes (use sparingly/for API calls)
 
 exports.layout = function(req, res) {
-  var testData = require("./test-session-object.json");
+  // var envelopeData = require("./tmp/envelope.json");
   res.render('layout', {
     title: 'inHouse',
-    signedRequestJson: JSON.stringify(testData)
   })
 }
 
 exports.authenticate = function(req, res){
-    var bodyArray = req.body.signed_request .split(".");
+    var bodyArray = req.body.signed_request.split(".");
     var consumerSecret = bodyArray[0];
     var encoded_envelope = bodyArray[1];
 

@@ -5,7 +5,7 @@
 }
 .c3 path, .c3 line {
   fill: none;
-  stroke: #000;
+  stroke: #b2b2b2;
 }
 .c3 text {
   -webkit-user-select: none;
@@ -187,7 +187,7 @@
   stroke: none;
 }
 .c3-chart-arcs .c3-chart-arcs-gauge-unit {
-  fill: #000;
+  fill: #b2b2b2;
   font-size: 16px;
 }
 .c3-chart-arcs .c3-chart-arcs-gauge-max {
@@ -198,6 +198,6 @@
 }
 
 .c3-chart-arc .c3-gauge-value {
-  fill: #000;
+  fill: #b2b2b2;
   font-size: 28px;
 }
