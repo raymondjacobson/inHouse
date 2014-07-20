@@ -1,23 +1,18 @@
-h1 {{reference_name}}
-
 div(class='box hovered')
   div(class='thumb cf')
     i(class='fa fa-globe')
   div(class='content cf')
-    h2 Banana Stands
-      small(class='date') 7/19/14
-    p There's always money in the Banana Stand
+    h2 {{concept.payload.Name}}
+      small(class='date') {{concept.payload.GenerationDate__c}}
+    p {{concept.payload.Abstract__c}}
     p
-      em(class='tokens green') cost 100
-      em(class='tokens green') tokens 100100
+      em(class='tokens green') cost: 100
+      em(class='tokens green') tokens: {{concept.payload.TotalTokens__c}}
     p You own
-      input(type='text' class='small')
+      input(type='text' class='small' value='100')
       em(class='tokens blue buy-stock') make deal
   div(class='details cf')
     h2 Details
-    p. This is some stupid text that I'm too lazy to go to the
-      lorem ipsum website to get blah blah blah this is a
-      really stupid idea. lorem ipsum website to get blah blah blah this is a
-      really stupid idea. lorem ipsum website to get blah blah blah this is a
-      really stupid idea.
+    p {{concept.payload.Body__c}}
+h1 Market Trend
 div(id='chart')
