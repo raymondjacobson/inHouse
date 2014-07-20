@@ -101,12 +101,18 @@ inHouseApp.controller('FeaturedCtrl', function($scope, $http, $q) {
               if(concepts.length==records.length){
                 deferred.resolve(concepts);
                 deferred.promise.then(function(concepts_data){
-                  console.log(concepts_data[0].payload.TotalTokens__c);
+                  for(var i =0; i<concepts_data.length; ++i){
+                    console.log(concepts_data[i].payload.TotalTokens__c);
+                  }
                   concepts_data.sort(function(a, b){
-                    return a.payload.TotalTokens__c < b.payload.TotalTokens__c;
+                    // console.log(a.payload.TotalTokens__c < b.payload.TotalTokens__c);
+                    return a.payload.TotalTokens__c - b.payload.TotalTokens__c;
                   });
-                  console.log(concepts_data);
-                  $scope.concepts = concepts_data;
+                  console.log('-----');
+                  for(var i =0; i<concepts_data.length; ++i){
+                    console.log(concepts_data[i].payload.TotalTokens__c);
+                  }
+                  $scope.concepts = concepts_data.slice(0, 3);
                 });
               }
             }
@@ -137,10 +143,10 @@ inHouseApp.controller('PopularCtrl', function($scope, $http, $q) {
                 deferred.resolve(concepts);
                 deferred.promise.then(function(concepts_data){
                   concepts_data.sort(function(a, b){
-                    return a.payload.TotalTokens__c < b.payload.TotalTokens__c;
+                    return a.payload.TotalTokens__c - b.payload.TotalTokens__c;
                   });
                   console.log(concepts_data);
-                  $scope.concepts = concepts_data;
+                  $scope.concepts = concepts_data.slice(0, 5);
                 })
               }
             }
@@ -171,10 +177,10 @@ inHouseApp.controller('RecentCtrl', function($scope, $http, $q) {
                 deferred.resolve(concepts);
                 deferred.promise.then(function(concepts_data){
                   concepts_data.sort(function(a, b){
-                    return a.payload.CreatedDate < b.payload.CreatedDate;
+                    return a.payload.CreatedDate - b.payload.CreatedDate;
                   });
                   console.log(concepts_data);
-                  $scope.concepts = concepts_data;
+                  $scope.concepts = concepts_data.slice(0, 5);
                 })
               }
             }
@@ -216,8 +222,8 @@ inHouseApp.controller('ProfileCtrl', function($scope, $q) {
                 deferred.resolve(concepts);
                 deferred.promise.then(function(concepts_data){
                   console.log(concepts_data);
-                  // add sorting code
-                  $scope.concepts = concepts_data;
+                  // add sorting code ?>???>??>>>??
+                  $scope.concepts = concepts_data.slice(0, 5);
                 });
               }
             }
