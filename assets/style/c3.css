@@ -33,18 +33,30 @@
 /*-- Axis --*/
 
 .c3-axis-x .tick {
+  fill: none;
+  stroke: #b2b2b2;
 }
 .c3-axis-x-label {
+  fill: none;
+  stroke: #b2b2b2;
 }
 
 .c3-axis-y .tick {
+  fill: none;
+  stroke: #b2b2b2;
 }
 .c3-axis-y-label {
+  fill: none;
+  stroke: #b2b2b2;
 }
 
 .c3-axis-y2 .tick {
+  fill: none;
+  stroke: #b2b2b2;
 }
 .c3-axis-y2-label {
+  fill: none;
+  stroke: #b2b2b2;
 }
 
 /*-- Grid --*/

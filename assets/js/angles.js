@@ -80,24 +80,50 @@ inHouseApp.config(function($routeProvider) {
 // controllers
 inHouseApp.controller('Ctrl', function($scope) {});//default scope
 
-inHouseApp.controller('FeaturedCtrl', function($scope) {
+inHouseApp.controller('FeaturedCtrl', function($scope, $http, $q) {
+  var deferred = $q.defer();
   $scope.reference_name = 'featured';
-  var query = 'SELECT+quantity__c+FROM+egg__c';
-  console.log(get_concept_group(sr, query));
+  var query = 'SELECT+name+FROM+Concept__c';
+  var url = sr.context.links.queryUrl + "?q=" + query;
+  var concepts = [];
+  Sfdc.canvas.client.ajax(url,
+    {client: sr.client,
+    success: function(data){
+      if (data.status == 200) {
+        var records = data.payload.records;
+        for(i=0;i<records.length;++i){
+          console.log(records[i].attributes.url);
+          Sfdc.canvas.client.ajax(records[i].attributes.url,
+          {client: sr.client,
+          success: function(data2){
+            if (data2.status == 200) {
+              concepts.push(data2);
+              if(concepts.length==records.length){
+                deferred.resolve(concepts);
+                deferred.promise.then(function(concepts_data){
+                  console.log(concepts_data);
+                  $scope.concepts = concepts_data;
+                })
+              }
+            }
+          }});
+        }
+      }
+    }});
 });
 inHouseApp.controller('PopularCtrl', function($scope) {
   $scope.reference_name = 'popular';
-  var query = '';
+  var query = 'SELECT+name+FROM+Concept__c';
   console.log(get_concept_group(sr, query));
 });
 inHouseApp.controller('RecentCtrl', function($scope) {
   $scope.reference_name = 'recent';
-  var query = '';
+  var query = 'SELECT+name+FROM+Concept__c';
   console.log(get_concept_group(sr, query));
 });
 inHouseApp.controller('SearchCtrl', function($scope) {
   $scope.reference_name = 'results';
-  var query = '';
+  var query = 'SELECT+name+FROM+Concept__c';
   console.log(get_concept_group(sr, query));
 });
 inHouseApp.controller('ProfileCtrl', function($scope) {
@@ -106,7 +132,7 @@ inHouseApp.controller('ProfileCtrl', function($scope) {
   $scope.last_name = sr.context.user.lastName;
   $scope.email = sr.context.user.email;
   $scope.tokens = 100;
-  var query = '';
+  var query = 'SELECT+name+FROM+Concept__c';
   console.log(get_concept_group(sr, query));
 });
 inHouseApp.controller('ConceptViewCtrl', function($scope) {
@@ -117,8 +143,13 @@ inHouseApp.controller('ConceptViewCtrl', function($scope) {
 });
 inHouseApp.controller('ConceptAddCtrl', function($scope) {
   $scope.reference_name = 'add concept';
-  var url = "/services/data/v29.0/sobjects/egg__c";
-  var body = {"Name": "matt2", "quantity__c": "1220"};
+  var url = "/services/data/v29.0/sobjects/Concept__c";
+  var data_title = $('.data-title').val()
+  var data_abstract = $('.data-abstract').val()
+  var data_body = $('.data-body').val()
+  var data_tags = $('.data-tags').val()
+  var author = sr.context.user.firstName + ' ' + sr.context.user.lastNameh
+  var body = '{"name": "beer", "Abstract__c": "s", "GenerationDate__c": "02/21/2011", "TotalTokens__c" : "5", "ExpirationDate__c": "2015-12-02", “Body__c”: “stuff”, “Author__c” : “n”}'
   sf_POST(sr, url, body);
 });
 inHouseApp.controller('ConceptEditCtrl', function($scope) {

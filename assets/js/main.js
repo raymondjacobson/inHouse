@@ -8,4 +8,7 @@ $(document).ready(function(){
     $('#nav a').removeClass('index');
     $(this).addClass('index');
   });
+  $('.box').click(function(){
+    $('#nav a').removeClass('index');
+  })
 });

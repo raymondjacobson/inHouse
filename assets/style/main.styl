@@ -1,7 +1,10 @@
 /* COLORS */
 MAIN_COLOR = #fefefe
-YELLOW = #FCF7B1
-BLUE = #3065A1
+YELLOW = rgb(51, 148, 211)
+// YELLOW = rgb(252, 190, 48)
+// BLUE = #3065A1
+BLUE = rgb(51, 148, 211)
+GREEN = #82C087
 
 /* MIXINS */
 fader(prop, seconds)
@@ -27,6 +30,16 @@ p
   margin 0
   padding 0
   font-size 15px
+  em
+    font-size 12px
+    padding 2px 6px
+    margin-right 5px
+    &.green
+      border 1px solid GREEN
+      color GREEN
+    &.blue
+      border 1px solid BLUE
+      color BLUE
 
 small
   color YELLOW
@@ -43,7 +56,8 @@ body
   margin 0
   font-family 'Lato', Helvetica, sans-serif
   color darken(MAIN_COLOR, 30%)
-  // margin-bottom 40px
+.push
+  height 60px
 .cf
   *zoom 1
   &:after
@@ -63,6 +77,9 @@ body
 
 .pull-left
   float left
+
+.pad-top
+  padding-top 5px
 
 input
   &::-webkit-input-placeholder
@@ -119,6 +136,12 @@ input, textarea
     color YELLOW
     border 3px solid YELLOW
     outline 0
+  &.small
+    font-size 10px
+    width 40px
+    border 1px solid #ccc
+    margin 0 10px
+    padding 4px 0px
 textarea
   height 80px
   text-align left
@@ -145,13 +168,18 @@ button
   &:hover, &:focus
     background BLUE
     outline 0
-
+.buy-stock
+  cursor pointer
+  fader(all, 0.3s)
+  &:hover
+    border-color lighten(BLUE, 20%)
+    color lighten(BLUE, 20%)
 // navigation
 #nav
   position fixed
   bottom 0
   width 100%
-  background rgba(darken(MAIN_COLOR, 99%), 0.75)
+  background rgba(darken(MAIN_COLOR, 99%), 0.6)
   border-top 1px solid darken(MAIN_COLOR, 70%)
   text-align center
   margin 0 auto
@@ -186,6 +214,7 @@ button
 a .box
   color darken(MAIN_COLOR, 30%)
 .box
+  cursor pointer
   box-sizing:border-box;
   -moz-box-sizing:border-box;
   -webkit-box-sizing:border-box;
