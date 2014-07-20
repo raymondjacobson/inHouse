@@ -232,9 +232,10 @@ inHouseApp.controller('ConceptViewCtrl', function($scope, $location, $q) {
   var deferred = $q.defer();
   var loc_params = $location.path().split('/');
   var id = loc_params[loc_params.length-1];
-  var url = '/services/data/v31.0/sobjects/Concept__c/'+ id;
+  var concept_url = '/services/data/v31.0/sobjects/Concept__c/'+ id;
+  console.log(id);
   var concepts = [];
-  Sfdc.canvas.client.ajax(url,
+  Sfdc.canvas.client.ajax(concept_url,
     {client: sr.client,
     success: function(data){
       if (data.status == 200) {
@@ -250,9 +251,41 @@ inHouseApp.controller('ConceptViewCtrl', function($scope, $location, $q) {
   var data = [30, 200, 100, 400, 150, 250, 30, 30, 40, 50, 100, 120];
   var chart = generateC3Graph('#chart', data, width);
   $(".buy-stock").click(function(){
+     /* var deferred = $q.defer();
+    Sfdc.canvas.client.ajax(concept_url,
+      {client: sr.client,
+      success: function(data){
+        if (data.status == 200) {
+          deferred.resolve(data);
+          deferred.promise.then(function(data){
+            console.log(data);
+            $scope.concept = data;
+          })
+        }
+      }
+    });*/
     console.log("Good for you!");
-    // sf_PATCH(sr, url, body);
-    // $location.path('/featured');
+    var quantity = $('.small').val();
+    var diff = parseInt(quantity, 10);
+    quantity = parseInt(quantity, 10);
+    var concept_body = {"TotalTokens__c": quantity + $scope.concept.payload.TotalTokens__c};
+    sf_PATCH(sr, concept_url, concept_body);
+
+    var get_user_tokens_url = "/services/data/v29.0/query?q=SELECT+Tokens__c+,+UserId__c+FROM+UserTokens__c+WHERE+UserId__c+=+'"+sr.userId+"'";
+    console.log(get_user_tokens_url);
+    Sfdc.canvas.client.ajax(get_user_tokens_url,
+      {client: sr.client,
+      success: function(token_data){
+        if (token_data.status == 200) {
+            var current = token_data.payload.records[0].Tokens__c;
+            var user_body = {
+              "Tokens__c": current + quantity*-1
+            };
+            var user_url = token_data.payload.records[0].attributes.url;
+            sf_PATCH(sr, user_url, user_body);
+          }
+        }
+      });
   });
 });
 inHouseApp.controller('ConceptAddCtrl', function($scope, $location) {
