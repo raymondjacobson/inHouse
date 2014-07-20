@@ -195,6 +195,7 @@ inHouseApp.controller('ConceptViewCtrl', function($scope, $location, $q) {
   var loc_params = $location.path().split('/');
   var id = loc_params[loc_params.length-1];
   var url = '/services/data/v31.0/sobjects/Concept__c/'+ id;
+  console.log(id);
   var concepts = [];
   Sfdc.canvas.client.ajax(url,
     {client: sr.client,
@@ -213,7 +214,12 @@ inHouseApp.controller('ConceptViewCtrl', function($scope, $location, $q) {
   var chart = generateC3Graph('#chart', data, width);
   $(".buy-stock").click(function(){
     console.log("Good for you!");
-    // sf_PATCH(sr, url, body);
+    var quantity = $('.small').val();
+    var diff = parseInt(quantity, 10);
+    quantity = parseInt(quantity, 10) + $scope.concept.payload.TotalTokens__c;
+    var body = {"TotalTokens__c": quantity};
+    var num = 1;
+    sf_PATCH(sr, url, body, diff, num);
     // $location.path('/featured');
   });
 });
