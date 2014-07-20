@@ -101,8 +101,11 @@ inHouseApp.controller('FeaturedCtrl', function($scope, $http, $q) {
               if(concepts.length==records.length){
                 deferred.resolve(concepts);
                 deferred.promise.then(function(concepts_data){
+                  console.log(concepts_data[0].payload.TotalTokens__c);
+                  concepts_data.sort(function(a, b){
+                    return a.payload.TotalTokens__c < b.payload.TotalTokens__c;
+                  });
                   console.log(concepts_data);
-                  // add sorting code
                   $scope.concepts = concepts_data;
                 });
               }
@@ -133,6 +136,9 @@ inHouseApp.controller('PopularCtrl', function($scope, $http, $q) {
               if(concepts.length==records.length){
                 deferred.resolve(concepts);
                 deferred.promise.then(function(concepts_data){
+                  concepts_data.sort(function(a, b){
+                    return a.payload.TotalTokens__c < b.payload.TotalTokens__c;
+                  });
                   console.log(concepts_data);
                   $scope.concepts = concepts_data;
                 })
@@ -164,6 +170,9 @@ inHouseApp.controller('RecentCtrl', function($scope, $http, $q) {
               if(concepts.length==records.length){
                 deferred.resolve(concepts);
                 deferred.promise.then(function(concepts_data){
+                  concepts_data.sort(function(a, b){
+                    return a.payload.CreatedDate < b.payload.CreatedDate;
+                  });
                   console.log(concepts_data);
                   $scope.concepts = concepts_data;
                 })
