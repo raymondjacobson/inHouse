@@ -106,7 +106,7 @@ inHouseApp.controller('FeaturedCtrl', function($scope, $http, $q) {
                   }
                   concepts_data.sort(function(a, b){
                     // console.log(a.payload.TotalTokens__c < b.payload.TotalTokens__c);
-                    return a.payload.TotalTokens__c - b.payload.TotalTokens__c;
+                    return b.payload.TotalTokens__c - a.payload.TotalTokens__c;
                   });
                   console.log('-----');
                   for(var i =0; i<concepts_data.length; ++i){
@@ -143,7 +143,7 @@ inHouseApp.controller('PopularCtrl', function($scope, $http, $q) {
                 deferred.resolve(concepts);
                 deferred.promise.then(function(concepts_data){
                   concepts_data.sort(function(a, b){
-                    return a.payload.TotalTokens__c - b.payload.TotalTokens__c;
+                    return b.payload.TotalTokens__c - a.payload.TotalTokens__c;
                   });
                   console.log(concepts_data);
                   $scope.concepts = concepts_data.slice(0, 5);
@@ -177,9 +177,8 @@ inHouseApp.controller('RecentCtrl', function($scope, $http, $q) {
                 deferred.resolve(concepts);
                 deferred.promise.then(function(concepts_data){
                   concepts_data.sort(function(a, b){
-                    return a.payload.CreatedDate - b.payload.CreatedDate;
+                    return moment(b.payload.GenerationDate__c) - moment(a.payload.GenerationDate__c);
                   });
-                  console.log(concepts_data);
                   $scope.concepts = concepts_data.slice(0, 5);
                 })
               }
