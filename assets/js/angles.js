@@ -102,8 +102,9 @@ inHouseApp.controller('FeaturedCtrl', function($scope, $http, $q) {
                 deferred.resolve(concepts);
                 deferred.promise.then(function(concepts_data){
                   console.log(concepts_data);
+                  // add sorting code
                   $scope.concepts = concepts_data;
-                })
+                });
               }
             }
           }});
@@ -135,8 +136,26 @@ inHouseApp.controller('ProfileCtrl', function($scope) {
   var query = 'SELECT+name+FROM+Concept__c';
   console.log(get_concept_group(sr, query));
 });
-inHouseApp.controller('ConceptViewCtrl', function($scope) {
+inHouseApp.controller('ConceptViewCtrl', function($scope, $location, $q) {
+  console.log($location.path());
   $scope.reference_name = 'view concept';
+  var deferred = $q.defer();
+  var id = 
+  $scope.reference_name = 'featured';
+  var query = 'SELECT+name+FROM+Concept__c+WHERE+Id='+id;
+  var url = sr.context.links.queryUrl + "?q=" + query;
+  var concepts = [];
+  Sfdc.canvas.client.ajax(url,
+    {client: sr.client,
+    success: function(data){
+      if (data.status == 200) {
+        deferred.resolve(data);
+        deferred.promise.then(function(data){
+          $scope.concept_data = data;
+        })
+      }
+    }
+  });
   var width = $('.box').width();
   var data = [30, 200, 100, 400, 150, 250, 30, 30, 40, 50, 100, 120];
   var chart = generateC3Graph('#chart', data, width);
