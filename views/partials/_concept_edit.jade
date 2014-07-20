@@ -1,20 +1,20 @@
 h1 {{reference_name}}
-
-p
+ 
+div
   label Title
-p
-  input(type='input' value='concept1')
-p
+div
+  input(type='input' value='concept1' id='data-title')
+div
   label Abstract
-p
-  input(type='input' value='some stupid abstract')
-p
+div
+  input(type='input' value='some stupid abstract' id='data-abstract')
+div
   label Body
-p
-  textarea blah blah blah body
-p
+div
+  textarea(id='data-body') blah blah blah body
+div
   label Tags
-p
-  input(type='input' value='food, swag')
-p
-  button Let's make some change!
+div
+  input(type='input' value='food, swag' id='data-tags')
+a(href='#profile')
+  button(class='submit') Let's make some change!
