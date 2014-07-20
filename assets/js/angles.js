@@ -226,22 +226,23 @@ inHouseApp.controller('ConceptAddCtrl', function($scope, $location) {
   } 
   today = yyyy+'/'+mm+'/'+dd;
   $scope.reference_name = 'add concept';
-  var url = "/services/data/v29.0/sobjects/Concept__c";
-  var data_title = $('.data-title').val()
-  console.log(data_title);
-  var data_abstract = $('.data-abstract').val()
-  var data_body = $('.data-body').val()
-  var data_tags = $('.data-tags').val()
-  var author = sr.context.user.firstName + ' ' + sr.context.user.lastNameh
-  var body = "{'name': '"+data_title+
-    "', 'Abstract__c': '"+data_abstract+
-    "', 'GenerationDate__c': '"+today+
-    "', 'TotalTokens__c' : '1', 'ExpirationDate__c': '2016-12-02', 'Body__c': '"+data_body+
-    "', 'Author__c' : '"+author+"'}";
   $('.submit').click(function(){
-    console.log(body);
+    var url = "/services/data/v29.0/sobjects/Concept__c";
+    var data_title = $('#data-title').val()
+    var data_abstract = $('#data-abstract').val()
+    var data_body = $('#data-body').val()
+    var data_tags = $('#data-tags').val()
+    var author = sr.context.user.firstName + ' ' + sr.context.user.lastName
+    var body = {
+      "name": data_title,
+      "Abstract__c": data_abstract,
+      "GenerationDate__c": today,
+      "TotalTokens__c" : "1",
+      "ExpirationDate__c": "2016-12-02",
+      "Body__c": data_body,
+      "Author__c" : author
+    };
     sf_POST(sr, url, body);
-    // $location.path('/featured');
   });
 });
 inHouseApp.controller('ConceptEditCtrl', function($scope) {

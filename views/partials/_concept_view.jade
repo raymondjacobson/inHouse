@@ -4,6 +4,7 @@ div(class='box hovered')
   div(class='content cf')
     h2 {{concept.payload.Name}}
       small(class='date') {{concept.payload.GenerationDate__c}}
+    h3 by {{concept.payload.Author__c}}
     p {{concept.payload.Abstract__c}}
     p
       em(class='tokens green') cost: 100
